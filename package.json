@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@dcloudio/vue-cli-plugin-uni": "^2.0.2-3090920231225001"
+  }
+}
