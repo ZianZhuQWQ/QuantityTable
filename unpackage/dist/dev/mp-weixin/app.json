@@ -1,0 +1,51 @@
+{
+  "pages": [
+    "pages/login/login",
+    "pages/mine/mine",
+    "pages/mine/psw",
+    "pages/result/result",
+    "pages/result/detail",
+    "pages/result/test-history",
+    "pages/query/query",
+    "pages/home/home",
+    "pages/test-page-nav/test-page-nav",
+    "pages/test-page-nav/evaluate-form/evaluate-form",
+    "pages/test-page-nav/mini-cog/mini-cog",
+    "pages/test-page-nav/moca/moca",
+    "pages/test-page-nav/his/his",
+    "pages/test-page-nav/mmse/mmse",
+    "pages/test-page-nav/mini-cog/two"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "borderStyle": "black",
+    "selectedColor": "#76EEC6",
+    "list": [
+      {
+        "pagePath": "pages/home/home",
+        "text": "首页",
+        "iconPath": "static/home.png",
+        "selectedIconPath": "static/home_active.png"
+      },
+      {
+        "pagePath": "pages/result/result",
+        "text": "结果",
+        "iconPath": "static/result.png",
+        "selectedIconPath": "static/result_active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "我的",
+        "iconPath": "static/mine.png",
+        "selectedIconPath": "static/mine_active.png"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

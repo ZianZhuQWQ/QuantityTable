@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#76EEC6",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "阿尔兹海默病筛查",
+  "usingComponents": {
+    "navbar": "/components/nav-bar",
+    "form-item-render": "/components/form-item-render"
+  }
+}

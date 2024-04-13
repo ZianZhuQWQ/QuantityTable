@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#76EEC6",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "简易智能精神状态量表(MMSE)",
+  "usingComponents": {
+    "navbar": "/components/nav-bar",
+    "form-item-render": "/components/form-item-render"
+  }
+}

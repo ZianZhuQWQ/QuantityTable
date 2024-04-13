@@ -1,0 +1,25 @@
+
+page.data-v-5a05f491 {
+	height: 100%
+}
+#contianer.data-v-5a05f491 {
+	padding-top: 1rpx;
+	position: relative;
+	height: 100%;
+	/* 本页面背景颜色 */
+	background-color: #F5F5F5;
+}
+.title.data-v-5a05f491 {
+	color: #696969;
+	margin: 15rpx 20rpx;
+}
+.input.data-v-5a05f491 {
+	padding: 20rpx 20rpx;
+	background-color: #fff;
+}
+.button.data-v-5a05f491 {
+	width: 93%;
+	color: #fff;
+	background-color: #76EEC6;
+}
+

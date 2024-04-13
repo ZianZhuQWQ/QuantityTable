@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#76EEC6",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "缺血指数量表(HIS)",
+  "usingComponents": {
+    "navbar": "/components/nav-bar",
+    "form-item-render": "/components/form-item-render"
+  }
+}

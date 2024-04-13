@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "luch-audio": "/components/luch-audio/luch-audio",
+    "play-audio": "/components/play-audio"
+  }
+}

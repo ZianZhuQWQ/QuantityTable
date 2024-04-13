@@ -1,0 +1,1 @@
+<view class="item-wrap"><view class="left-wrap">{{''+dateStr+''}}</view><view data-event-opts="{{[['tap',[['gotoDetail',['$event']]]]]}}" class="right-wrap" bindtap="__e">查看结果详情<image class="arrow-right" src="{{$root.m0}}"></image></view></view>

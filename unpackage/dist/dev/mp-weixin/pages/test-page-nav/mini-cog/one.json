@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "navbar": "/components/nav-bar",
+    "recording": "/components/recording"
+  }
+}

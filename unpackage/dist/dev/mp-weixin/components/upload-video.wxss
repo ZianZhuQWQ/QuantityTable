@@ -1,0 +1,23 @@
+.wrap {
+  width: 90vw;
+  height: 90vw;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.wrap .video-box {
+  box-sizing: border-box;
+  padding: 24px;
+  width: 100%;
+  height: 100%;
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+}
+.wrap .video-box .video,
+.wrap .video-box .img {
+  width: 100%;
+  height: 100%;
+}
+

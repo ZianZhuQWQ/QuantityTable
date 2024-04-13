@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#76EEC6",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "蒙特利尔认知评估量表(MoCA)",
+  "usingComponents": {
+    "navbar": "/components/nav-bar"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#76EEC6",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "Mini-Cog量表",
+  "usingComponents": {
+    "navbar": "/components/nav-bar",
+    "upload-video": "/pages/test-page-nav/mini-cog/two",
+    "recording-one": "/pages/test-page-nav/mini-cog/one",
+    "recording-three": "/pages/test-page-nav/mini-cog/three"
+  }
+}

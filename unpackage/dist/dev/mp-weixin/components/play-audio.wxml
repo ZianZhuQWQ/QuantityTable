@@ -1,0 +1,1 @@
+<view class="wrap data-v-51425610"><view class="audio-con data-v-51425610"><view class="audio-time data-v-51425610">{{audioTimeUpdate}}</view></view><view data-event-opts="{{[['tap',[['handleBtnClick',['$event']]]]]}}" class="play-btn data-v-51425610" bindtap="__e">{{''+(videoIsPlay?'暂停':'播放')+''}}</view></view>

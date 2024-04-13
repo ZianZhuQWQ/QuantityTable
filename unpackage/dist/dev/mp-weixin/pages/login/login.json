@@ -1,0 +1,10 @@
+{
+  "navigationStyle": "custom",
+  "navigationBarBackgroundColor": "#76EEC6",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "登录",
+  "usingComponents": {
+    "navbar": "/components/nav-bar",
+    "uni-list": "/uni_modules/uni-list/components/uni-list/uni-list"
+  }
+}
