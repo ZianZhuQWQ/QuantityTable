@@ -122,7 +122,7 @@
 					this.score = scoreSum
 					console.log('this.score', this.score, 'scoreSum', scoreSum)
 
-					console.log('ssssssssssssssssss', this.score)
+					console.log('this.score', this.score)
 
 					// 调保存接口TODO
 					uni.showLoading({
