@@ -1,9 +1,8 @@
 <template>
 	<view class="page-wrap">
 		<!-- <navbar :pageTitle="isAddUser && '添加新患者' || '请选择患者进行测评'" /> -->
-		<navbar :pageTitle="isAddUser && '添加新患者' || '请选择患者进行测评'" :showGoback="true" :refresh="true"
+		<navbar :pageTitle="isAddUser && '添加新患者' || '请选择患者进行测评'" :showGoback="true" :showRefresh="'left'"
 			@refreshFn="refresh" />
-
 
 		<!-- 搜索 -->
 		<view class="search-wrap" v-if="!isAddUser">
@@ -27,9 +26,8 @@
 		</view> -->
 
 		<view class="query-list">
-			<uni-list-item v-for="item in patient" :key="item.patient_id" :title="item.patient_name"
-				:note="item.mobile" rightText="重新测评" thumb="/static/old.png" thumb-size="lg" showArrow clickable
-				@click="clickItem(item)" />
+			<uni-list-item v-for="item in patient" :key="item.patient_id" :title="item.patient_name" :note="item.mobile"
+				rightText="重新测评" thumb="/static/old.png" thumb-size="lg" showArrow clickable @click="clickItem(item)" />
 		</view>
 
 		<uni-list class="content-wrap" v-if="!isAddUser">
@@ -129,7 +127,6 @@
 		},
 		mounted() {
 			this.fetchData();
-
 			// this.getDataList();
 
 
