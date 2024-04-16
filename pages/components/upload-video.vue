@@ -32,21 +32,21 @@
 		},
 		data() {
 			return {
-				quantityTableType: "Mini-Cog",
-				question_content: "画出钟表表盘：\n徒手画出11:10或8:20",
-				safeAreaInsets: null,
-				quantityTable: "HIS量表",
+				// quantityTableType: "Mini-Cog",
+				// question_content: "画出钟表表盘：\n徒手画出11:10或8:20",
+				// safeAreaInsets: null,
+				// quantityTable: "HIS量表",
 			}
 		},
 		mounted() {
 			this.getSafeAreaInsets()
 		},
 		methods: {
-			getSafeAreaInsets() {
-				// 获取屏幕边界到安全区域距离
-				const systemInfo = uni.getSystemInfoSync()
-				this.safeAreaInsets = systemInfo.safeAreaInsets
-			},
+			// getSafeAreaInsets() {
+			// 	// 获取屏幕边界到安全区域距离
+			// 	const systemInfo = uni.getSystemInfoSync()
+			// 	this.safeAreaInsets = systemInfo.safeAreaInsets
+			// },
 			//*选择视频*//
 			addPic: async function() {
 				let that = this
@@ -90,7 +90,8 @@
 			display: flex;
 			flex-direction: column;
 
-			.video, .img {
+			.video,
+			.img {
 				width: 100%;
 				height: 100%;
 			}

@@ -26,6 +26,7 @@
 	import {
 		formatDateTime
 	} from '@/common/api/moment.js';
+	import store from '@/store/index.js'
 
 	export default {
 		components: {
@@ -91,9 +92,31 @@
 						this.patientTime = res.data.patients
 						console.log('res.data.patients', res.data.patients)
 						console.log('this.patients', this.patientTime)
+						console.log('this.patients.created_at', this.patientTime.created_at)
 
 						this.$store.commit('setPatientInfoData', this.patientTime);
+						console.log('this.patients.created_at', store.state.patientInfoData.created_at)
+						const date = store.state.patientInfoData.created_at[0];
+						
+						
+						// const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')} ${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+						// console.log('formattedDate',formattedDate)
+						
+						
+						// var dateString = "2024-04-12T05:05:53.000Z";
+						// var date = new Date(dateString);
 
+						// var year = date.getUTCFullYear();
+						// var month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+						// var day = date.getUTCDate().toString().padStart(2, "0");
+						// var hours = date.getUTCHours().toString().padStart(2, "0");
+						// var minutes = date.getUTCMinutes().toString().padStart(2, "0");
+						// var seconds = date.getUTCSeconds().toString().padStart(2, "0");
+
+						// var formattedDateTime = year + "-" + month + "-" + day + " " + hours + ":" + minutes +
+						// 	":" + seconds;
+
+						// console.log("Formatted Date and Time: " + formattedDateTime);
 						// this.created_time=new Date(this.patientTime.created_at)
 
 						// console.log('created_time', this.created_time)
@@ -116,9 +139,12 @@
 					},
 				});
 			},
-			clickItem() {
+			clickItem(item) {
+				store.commit('setResultCreatedAt', item.created_at)
+				console.log('item.created_at',item.created_at)
+				
 				uni.navigateTo({
-					url: `/pages/test-page-nav/test-page-nav?userId=${this.userInfo.userId}&isDetail=1`
+					url: `/pages/test-page-nav/test-page-nav?userName=${this.userInfo.userName}&userId=${this.userInfo.userId}&isDetail=1`
 				});
 			}
 		}

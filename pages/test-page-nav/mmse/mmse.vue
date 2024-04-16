@@ -4,17 +4,26 @@
 
 		<view class="content-wrap">
 			<template v-for="(item, index) in items">
-				<view class="item-wrap" v-show="isDetail || index == current - 1">
+				<view :key="item.key" class="item-wrap" v-show="isDetail || index == current - 1">
 					<view class="tips">
 						{{ index + 1 + '、' }}
 						{{ item.tips }}
 						<image v-if="item.imgSrc" class='img' :src='item.imgSrc' mode='aspectFit' />
 					</view>
 
-					<view class="result">
-						<form-item-render :item="item.result" v-model="formData[item.key]" :disable="isDetail"
-							:showText="true" @onChange="onChange" />
+					<view class="attachment-wrap" v-if="!!item.attachment">
+						<template v-for="attachment in item.attachment">
+							<form-item-render :key="attachment.key" :item="attachment"
+								v-model="formData[attachment.key]" :disable="isDetail" :showText="true"
+								@onChange="onChange" />
+						</template>
 					</view>
+
+					<view class="result">
+						<form-item-render :key="item.key" :item="{ ...item.result, key: item.key }"
+							v-model="formData[item.key]" :disable="isDetail" :showText="true" @onChange="onChange" />
+					</view>
+
 				</view>
 			</template>
 
@@ -43,11 +52,13 @@
 	import navbar from '@/components/nav-bar.vue';
 	import formItemRender from '@/components/form-item-render.vue'
 	import store from '@/store/index.js'
+	import uploadVideo from '@/components/upload-video.vue';
 
 	export default {
 		components: {
 			navbar,
 			formItemRender,
+			uploadVideo,
 		},
 		data() {
 			return {
@@ -88,9 +99,10 @@
 			}
 		},
 		methods: {
-			onChange(values) {
-				this.$set(this.formData, this.items[this.current - 1].key, values.value)
+			onChange(data) {
+				this.$set(this.formData, data.key, data.value)
 			},
+
 			formSubmit() {
 				let nullItem = null; // 存在未填写且显示的元素
 				store.state.mmseItems.forEach((item, index) => {
@@ -115,8 +127,8 @@
 					that.items.forEach(item => {
 						scoreSum += Number(that.formData[item.key]) || 0;
 					})
-					this.score=scoreSum
-					console.log('ssssssssssssssssss',this.score)
+					this.score = scoreSum
+					console.log('ssssssssssssssssss', this.score)
 
 					// 调保存接口TODO
 					uni.showLoading({
@@ -206,10 +218,10 @@
 					success: (res) => {
 						if (res.data) {
 							console.log('res', res)
-							console.log('res.data',res.data)
+							console.log('res.data', res.data)
 							this.formData = res.data.data[0]
-							console.log('this.formData',this.formData)
-							
+							console.log('this.formData', this.formData)
+
 						}
 						uni.hideLoading()
 					},
@@ -258,6 +270,10 @@
 						width: 80%;
 						margin-top: 16px;
 					}
+				}
+
+				.attachment-wrap {
+					width: 100%;
 				}
 
 				.result {

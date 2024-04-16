@@ -217,7 +217,8 @@
 					data: {
 
 						...that.otherData,
-						created_at: store.state.patientInfoData.created_at,
+						// created_at: store.state.patientInfoData.created_at,
+						created_at: store.state.result_created_at
 
 					},
 					timeout: 6000,
@@ -226,6 +227,8 @@
 						if (res.data) {
 							console.log('res', res)
 							console.log('res.data', res.data)
+							
+							
 							this.formData = res.data.data[0]
 							console.log('this.formData', this.formData)
 

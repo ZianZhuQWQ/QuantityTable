@@ -44,6 +44,7 @@
 			return {
 				isShowPassword: true,
 				password: '',
+				// imageUrl:'https://pic1.zhimg.com/v2-149c726ff219b8c678783b0ca5cae6e6_r.jpg?source=1940ef5c',
 				// title_login: getApp().globalData.icon + 'login/title_login.png',
 				// eye: getApp().globalData.icon + 'index/mine/eye.png',
 				// eye_close: getApp().globalData.icon + 'index/mine/eye_close.png',
@@ -75,19 +76,19 @@
 				let nurse_id = this.nurse_id
 				let password = this.password
 				//效验账号密码位数
-				if (nurse_id.length < 2 || nurse_id.length > 10) {
-					uni.showToast({
-						title: '账号应在2~10位之间',
-						icon: 'none'
-					})
-					return
-				} else if (password.length < 6 || password.length > 12) {
-					uni.showToast({
-						title: '密码应在6~12位之间',
-						icon: 'none'
-					})
-					return
-				} else {
+				// if (nurse_id.length < 2 || nurse_id.length > 10) {
+				// 	uni.showToast({
+				// 		title: '账号应在2~10位之间',
+				// 		icon: 'none'
+				// 	})
+				// 	return
+				// } else if (password.length < 6 || password.length > 12) {
+				// 	uni.showToast({
+				// 		title: '密码应在6~12位之间',
+				// 		icon: 'none'
+				// 	})
+				// 	return
+				// } else {
 					//传入数据到后端，进行登录
 					uni.request({
 						// url: getApp().globalData.position + 'Xcxuser/userlogin',
@@ -203,7 +204,13 @@
 						},
 						fail: res => {}
 					})
-				}
+				// }
+				
+				
+				
+				
+				
+				
 			},
 		}
 	}

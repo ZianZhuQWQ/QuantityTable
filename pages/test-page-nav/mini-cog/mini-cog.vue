@@ -9,12 +9,15 @@
 			<!-- 第二题画图 -->
 			<uploadVideo v-if="current == 2 || isDetail" @onChange="handleSaveVideo" :value="secondQuestion"
 				:isDetail="isDetail" />
+				
+			
+			
 			<!-- 第三题录音 -->
 			<recordingThree v-if="current == 3 || isDetail" @onChange="handleSaveRecording" :value="thirdQuestion"
 				:isDetail="isDetail" />
 
 			<view class="score" v-if="isDetail">
-				总得分：{{ score }}
+				总得分：{{ score_sum }}
 			</view>
 		</view>
 
@@ -49,25 +52,39 @@
 		},
 		data() {
 			return {
+				isDetail: false,
+				score_sum: 1,
+
+
 				current: 1,
 				firstQuestion: {
 					voicePath: '',
 				},
 				secondQuestion: {
 					videoPath: '',
+					result: []
 				},
 				otherData: {
 					patient_id: '',
 					patient_name: '',
 				},
 				thirdQuestion: {
-					voicePath: ''
+					voicePath: '',
+					result: []
 				},
-				isDetail: false
+
 			}
 		},
 		mounted() {
 			this.getData();
+		},
+		watch: {
+			isDetail: {
+				deep: true,
+				handler(newValue, oldValue) {
+					if (!!newValue) this.getDetailData();
+				}
+			}
 		},
 		onLoad: function(option) { // option为object类型，会序列化上个页面传递的参数
 			this.isDetail = !!Number(option.isDetail);
@@ -84,13 +101,16 @@
 				else if (type == 'down') this.current -= 1;
 				else if (type == 'submit') {
 					// 判断是否有分数
-					if (!Object.keys(this.secondQuestion).includes('result')) {
+					// if (!Object.keys(this.secondQuestion).includes('result')) {
+					if (!this.secondQuestion.result || this.secondQuestion.result.length === 0) {
 						this.current = 2;
 						uni.showToast({
 							title: '请上传图片后，并选择结果',
 							icon: 'none'
 						})
-					} else if (!Object.keys(this.thirdQuestion).includes('result')) {
+						// } else if (!Object.keys(this.thirdQuestion).includes('result')) {
+					} else if (!this.thirdQuestion.result || this.thirdQuestion.result.length === 0) {
+
 						this.current = 3;
 						uni.showToast({
 							title: '请完成录音后，并选择结果',
@@ -105,6 +125,74 @@
 						console.log('JSON.stringify(data)', JSON.stringify(data))
 						// 注入仓库
 						store.commit('setMiniCogData', data)
+
+
+						console.log('this.firstQuestion', this.firstQuestion)
+						console.log('this.secondQuestion', this.secondQuestion)
+						console.log('this.secondQuestion.result', this.secondQuestion.result[0])
+						console.log('this.secondQuestion.videoPath', this.secondQuestion.videoPath)
+						console.log('this.thirdQuestion', this.thirdQuestion)
+
+						console.log('this.otherData', this.otherData)
+
+
+						let scoreSum = 0;
+						// let createdDateTime = new Date().toISOString(); // 获取当前时间并转换为ISO 8601格式
+						// var date = new Date();
+
+						// var year = date.getUTCFullYear();
+						// var month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+						// var day = date.getUTCDate().toString().padStart(2, "0");
+						// var hours = date.getUTCHours().toString().padStart(2, "0");
+						// var minutes = date.getUTCMinutes().toString().padStart(2, "0");
+						// var seconds = date.getUTCSeconds().toString().padStart(2, "0");
+
+						// var formattedDateTime = year + "-" + month + "-" + day + " " + hours + ":" + minutes +
+						// 	":" + seconds;
+
+						// console.log("Formatted Date and Time: " + formattedDateTime);
+
+						const date = new Date(); // 获取当前日期和时间
+						const formattedDate =
+							`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}-${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+
+						uni.uploadFile({
+							url: 'http://47.113.91.80:8002/quest/uploadQuest2',
+							filePath: this.secondQuestion.videoPath,
+							name: 'img',
+							method: 'POST',
+							formData: {
+								patient_id: this.otherData.patient_id,
+								patient_name: this.otherData.patient_name,
+
+								score2: this.secondQuestion.result[0],
+								score3: this.thirdQuestion.result[0],
+								nurse: store.state.nurse,
+								score_sum: scoreSum,
+								created_at: formattedDate
+							},
+							timeout: 6000,
+							header: {},
+							success: (res) => {
+								if (res.data) {
+									console.log('res', res)
+									console.log('res.data', res.data)
+									// this.formData = res.data.data[0]
+									// console.log('this.formData',this.formData)
+
+								}
+								// uni.hideLoading()
+							},
+							fail(err) {
+								// uni.hideLoading()
+								uni.showToast({
+									title: "操作失败，请重试!" + (!!err.errMsg && '\n' + err.errMsg),
+									icon: 'none'
+								})
+							}
+						});
+
+
 					}
 				} else uni.navigateBack().catch(() => {
 					uni.switchTab({
@@ -147,6 +235,74 @@
 			gotoDetail(url) {
 				uni.navigateTo({
 					url: url + '?isDetail=1'
+				});
+			},
+			getDetailData() {
+				let that = this
+				console.log('ddddddddddddd', that.otherData)
+				uni.showLoading({
+					title: '正在获取数据...'
+				})
+
+				// 获取详情数据
+				uni.request({
+					url: 'http://47.113.91.80:8002/quest/getQuest2',
+					method: 'POST',
+					data: {
+
+						patient_id: that.otherData.patient_id,
+						created_at: store.state.result_created_at
+
+					},
+					timeout: 6000,
+					header: {},
+					success: (res) => {
+						if (res.data) {
+							console.log('res', res)
+							console.log('res.data', res.data)
+							this.score_sum = res.data.data[0].score_sum
+							console.log('this.score_sum', this.score_sum)
+
+							console.log('this.secondQuestion', this.secondQuestion)
+							console.log('this.secondQuestion.result', this.secondQuestion.result)
+
+
+							this.secondQuestion.result = res.data.data[0].score2
+							
+							
+							const baseUrl = 'http://47.113.91.80:8002/';
+							const filePath = res.data.data[0].img1
+							const fileUrl = baseUrl + filePath.replace(/^\.\//, '');
+							
+							this.secondQuestion.vedioPath = fileUrl
+							console.log(this.secondQuestion.vedioPath);
+							
+							
+							
+							
+							this.thirdQuestion.result = res.data.data[0].score3
+							// store.commit('setMiniCogScore2', score2)
+
+
+							console.log('this.secondQuestion.result', this.secondQuestion.result[0])
+
+							// this.secondQuestion.result[0]=res.data.data[0].score2
+							// // this.formData = res.data.data[0]
+
+
+
+							// console.log('this.secondQuestion.result', this.secondQuestion.result)
+
+						}
+						uni.hideLoading()
+					},
+					fail(err) {
+						uni.hideLoading()
+						uni.showToast({
+							title: "操作失败，请重试!" + (!!err.errMsg && '\n' + err.errMsg),
+							icon: 'none'
+						})
+					}
 				});
 			}
 		}

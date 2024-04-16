@@ -2,8 +2,10 @@
 	<view class='wrap'>
 		<!-- 视频 -->
 		<view class='video-box' v-if="!!value">
-			<video v-if="type == 'video'" class='video' :src='value' :poster='value' />
-			<image v-else class='img' :src='value' mode='aspectFit' />
+			<!-- <video v-if="type == 'video'" class='video' :src='value' :poster='value' /> -->
+			<!-- <image v-else class='img' :src='value' mode='aspectFit' /> -->
+			<image class='img' :src='value' mode='aspectFit' />
+
 		</view>
 
 		<!-- 添加按钮 -->
@@ -67,6 +69,10 @@
 					sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
 					success: function(res) {
 						that.$emit('onChange', res.tempFilePaths?.[0])
+						that.$emit('onChange1', res.tempFilePaths?.[0])
+						console.log('res.tempFilePaths.[0]', res.tempFilePaths?.[0])
+
+
 					}
 				})
 			},
@@ -92,7 +98,8 @@
 			display: flex;
 			flex-direction: column;
 
-			.video, .img {
+			.video,
+			.img {
 				width: 100%;
 				height: 100%;
 			}

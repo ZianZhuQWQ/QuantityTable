@@ -14,7 +14,7 @@
 				删除重新拍摄
 			</view>
 
-			<view class="result" v-if="videoPath">
+			<view class="result" >
 				<view class="label"> 结果
 					答对个数：
 				</view>
@@ -29,7 +29,7 @@
 			</view>
 
 			<view class="score" v-if="isDetail">
-				总得分：{{ getScore() }}
+				2得分：{{ getScore() }}
 			</view>
 		</view>
 	</view>
@@ -116,7 +116,8 @@
 			},
 			// 获取分数
 			getScore() {
-				return this.result?.filter(value => value != "0").length
+				// return this.result?.filter(value => value != "0").length
+				return this.result
 			},
 			// 结果变化
 			resultChange(e) {

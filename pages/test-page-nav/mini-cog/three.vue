@@ -5,9 +5,9 @@
 				<text>{{ tips }}</text>
 			</view>
 
-			<recording style="width: 100%; flex: 1" @onChange="onChange" :value="voicePath" :disable="isDetail" />
+			<recording v-if="showResult" style="width: 100%; flex: 1" @onChange="onChange" :value="voicePath" :disable="isDetail" />
 
-			<view class="result" v-if="voicePath">
+			<view class="result" >
 				<view class="label">
 					答对个数：
 				</view>
@@ -21,8 +21,8 @@
 				</radio-group>
 			</view>
 
-			<view class="score" v-if="isDetail || true">
-				总得分：{{ result }}
+			<view class="score" v-if="isDetail">
+				3得分：{{ result }}
 			</view>
 		</view>
 	</view>
@@ -54,7 +54,8 @@
 		},
 		data() {
 			return {
-				result: this.value.result || 0, // 分数
+				showResult: false,
+				result: this.value.result , // 分数
 				voicePath: this.value.voicePath || '',
 				tips: '重复说出以上三个词',
 				resultItems: [{

@@ -5,7 +5,7 @@
 				<text>{{ tips }}</text>
 			</view>
 
-			<recording style="width: 100%; flex: 1" @onChange="onChange" :value="value.voicePath" :disable="isDetail" />
+			<recording v-if="showResult" style="width: 100%; flex: 1" @onChange="onChange" :value="value.voicePath" :disable="isDetail" />
 		</view>
 	</view>
 </template>
@@ -25,6 +25,7 @@
 		},
 		data() {
 			return {
+				showResult: false,
 				tips: '认真听并重复以下词语：\n苹果 手表 硬币'
 			}
 		},

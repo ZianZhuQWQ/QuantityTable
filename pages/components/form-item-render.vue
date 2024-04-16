@@ -1,7 +1,15 @@
 <template>
 	<view class="form-item">
 		<view class="label">{{ item.label }}</view>
-		<view class="value-wrap">
+		<view class="value-wrap" v-if="!disable || showText">
+			<!-- 上传图片 -->
+			<view class="img-wrap">
+				<upload-video v-if="item.type == 'img'" :value="currentValue" @onChange="onChange" :disable="disable" />
+				<!-- 删除按钮 -->
+				<view v-if="item.type == 'img' && !!currentValue && !disable" class='deleteBtn' @click='onChange()'>
+					删除重新拍摄
+				</view>
+			</view>
 			<!-- 单选框 -->
 			<radio-group v-if="item.type == 'radio'" @change="onChange">
 				<view class="radio-items-wrap">
@@ -38,8 +46,13 @@
 </template>
 
 <script>
+	import uploadVideo from '@/components/upload-video.vue';
+
 	export default {
 		name: 'formItemRender',
+		components: {
+			uploadVideo
+		},
 		props: {
 			item: {
 				type: Object,
@@ -78,8 +91,16 @@
 		methods: {
 			// 单选框和多选框不能双向绑定只能这个
 			onChange(e) {
-				// this.value = e.detail.value
-				this.$set(this.value, this.item.key, e.detail.value)
+				if (this.item.type == 'img') {
+					this.$emit('onChange', {
+						key: this.item.key,
+						value: e
+					})
+				} else
+					this.$emit('onChange', {
+						key: this.item.key,
+						value: e.detail.value
+					})
 			},
 			// Checked选项是否选中
 			getChecked(value) {
@@ -111,6 +132,27 @@
 
 		.value-wrap {
 			color: #000000;
+
+			.img-wrap {
+				width: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+
+				// 图片删除按钮
+				.deleteBtn {
+					font-size: 16px;
+					width: calc(100% - 68px);
+					height: 32px;
+					padding: 4px 0;
+					border-radius: 4px;
+					color: #ffffff;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					background-color: rgba(255, 0, 0, 0.5);
+				}
+			}
 
 			// 单选的选项封装
 			.radio-items-wrap {

@@ -9,12 +9,19 @@ const store = new Vuex.Store({
 	state: { //存放状态
 		nurse: '', // 登录成功存放护士id
 
+		result_created_at: '',
+
+		minicog_score2: '',
+
+
 		patientInfoData: {
 			patient_id: [],
 			patient_name: [],
 			created_at: [],
 			mobile: []
 		},
+
+
 
 
 		evaluateFormData: {},
@@ -887,6 +894,12 @@ const store = new Vuex.Store({
 				key: 'linguistic4_4',
 				tips: '这是一张图，请您在同一张纸上照样画出来',
 				imgSrc: '../../../static/linguistic4_4.png',
+				// 附件
+				// 附件
+				attachment: [{
+					key: 'linguistic4_4_img',
+					type: 'img',
+				}],
 				result: {
 					label: '是否答对',
 					type: 'radio',
@@ -1327,6 +1340,12 @@ const store = new Vuex.Store({
 		},
 		setNurse(state, nurseId) {
 			state.nurse = nurseId
+		},
+		setResultCreatedAt(state, result_created_at) {
+			state.result_created_at = result_created_at
+		},
+		setMiniCogScore2(state, score) {
+			state.minicog_score2 = score
 		}
 	},
 })
