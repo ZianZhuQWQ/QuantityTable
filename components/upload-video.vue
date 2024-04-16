@@ -39,7 +39,7 @@
 			}
 		},
 		mounted() {
-			this.getSafeAreaInsets()
+			// this.getSafeAreaInsets()
 		},
 		methods: {
 			// getSafeAreaInsets() {
