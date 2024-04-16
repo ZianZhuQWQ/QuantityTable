@@ -1,13 +1,22 @@
 <template>
 	<view class="nav-wrap" :style="{ paddingTop: safeAreaInsets ? safeAreaInsets.top + 5 +'px' : '0' }">
-		<view class="goback" @click="goback">
-			<image v-if="showGoback" class="icon" src="../static/goback.png" />
+		<view class="btns" :class="showRefresh == 'left' && 'big-box'">
+			<view class="goback" @click="goback">
+				<image v-if="showGoback" class="icon" src="../static/goback.png" />
+			</view>
+			<view class="refresh" @click="refreshFn">
+				<image v-if="showRefresh == 'left'" class="icon" :class="loading && 'loading'"
+					src="../static/change.png" />
+			</view>
 		</view>
 		<view class="title">
 			<text class="navtext">{{pageTitle || '测量系统'}}</text>
 		</view>
-		<view class="refresh" @click="refreshFn">
-			<image v-if="!!refresh" class="icon" :class="loading && 'loading'" src="../static/change.png" />
+		<view class="btns" :class="showRefresh == 'left' && 'big-box'">
+			<view class="refresh" @click="refreshFn">
+				<image v-if="showRefresh == 'right'" class="icon" :class="loading && 'loading'"
+					src="../static/change.png" />
+			</view>
 		</view>
 	</view>
 </template>
@@ -23,19 +32,9 @@
 				type: Boolean,
 				required: false
 			},
-			refresh: {
-				type: Boolean,
+			showRefresh: {
+				type: 'left' | 'right',
 				required: false
-			}
-			
-			
-		},
-		watch: {
-			refresh: {
-				deep: true,
-				handler(newValue, oldValue) {
-					console.log('newValue', newValue, !!newValue)
-				}
 			}
 		},
 		data() {
@@ -91,29 +90,38 @@
 		justify-content: space-between;
 		padding-bottom: 28rpx;
 
-		// 返回
-		.goback,
-		.refresh {
-			width: 40px;
+		.btns {
 			display: flex;
 			align-items: center;
-			justify-content: center;
-			cursor: pointer;
+			justify-content: space-between;
+			width: 40px;
+			&.big-box {
+				width: 80px;
+			}
 
-			.icon {
-				width: 24px;
-				height: 24px;
+			.goback,
+			.refresh {
+				width: 40px;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
 
-				&.loading {
-					animation-name: rotate;
-					animation-duration: 1s;
-					animation-timing-function: linear;
-					animation-iteration-count: infinite;
+				.icon {
+					width: 24px;
+					height: 24px;
+
+					&.loading {
+						animation-name: rotate;
+						animation-duration: 1s;
+						animation-timing-function: linear;
+						animation-iteration-count: infinite;
+					}
 				}
 			}
+
 		}
 
-		// 
 		.title {
 			display: flex;
 			justify-content: center;
