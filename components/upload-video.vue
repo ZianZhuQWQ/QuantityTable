@@ -2,10 +2,8 @@
 	<view class='wrap'>
 		<!-- 视频 -->
 		<view class='video-box' v-if="!!value">
-			<!-- <video v-if="type == 'video'" class='video' :src='value' :poster='value' /> -->
-			<!-- <image v-else class='img' :src='value' mode='aspectFit' /> -->
-			<image class='img' :src='value' mode='aspectFit' />
-
+			<video v-if="type == 'video'" class='video' :src='value' :poster='value' />
+			<image v-else class='img' :src='value' mode='aspectFit' />
 		</view>
 
 		<!-- 添加按钮 -->
@@ -34,21 +32,21 @@
 		},
 		data() {
 			return {
-				quantityTableType: "Mini-Cog",
-				question_content: "画出钟表表盘：\n徒手画出11:10或8:20",
-				safeAreaInsets: null,
-				quantityTable: "HIS量表",
+				// quantityTableType: "Mini-Cog",
+				// question_content: "画出钟表表盘：\n徒手画出11:10或8:20",
+				// safeAreaInsets: null,
+				// quantityTable: "HIS量表",
 			}
 		},
 		mounted() {
 			this.getSafeAreaInsets()
 		},
 		methods: {
-			getSafeAreaInsets() {
-				// 获取屏幕边界到安全区域距离
-				const systemInfo = uni.getSystemInfoSync()
-				this.safeAreaInsets = systemInfo.safeAreaInsets
-			},
+			// getSafeAreaInsets() {
+			// 	// 获取屏幕边界到安全区域距离
+			// 	const systemInfo = uni.getSystemInfoSync()
+			// 	this.safeAreaInsets = systemInfo.safeAreaInsets
+			// },
 			//*选择视频*//
 			addPic: async function() {
 				let that = this
@@ -69,10 +67,6 @@
 					sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
 					success: function(res) {
 						that.$emit('onChange', res.tempFilePaths?.[0])
-						that.$emit('onChange1', res.tempFilePaths?.[0])
-						console.log('res.tempFilePaths.[0]', res.tempFilePaths?.[0])
-
-
 					}
 				})
 			},
@@ -90,10 +84,8 @@
 		justify-content: space-evenly;
 
 		.video-box {
-			box-sizing: border-box;
-			padding: 24px;
-			width: 100%;
-			height: 100%;
+			width: calc(100% - 68px);
+			height: calc(100% - 68px);
 			margin: 12px 0;
 			display: flex;
 			flex-direction: column;
