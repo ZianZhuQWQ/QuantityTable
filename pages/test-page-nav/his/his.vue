@@ -86,10 +86,7 @@
 			if (option.userInfo) {
 				const userInfo = JSON.parse(option.userInfo)
 				this.$set(this.otherData, 'patient_id', userInfo.userId)
-				this.$set(this.otherData, 'patient_name', userInfo.userName)
-				
-				
-				this.$set(this.otherData, 'created_at', '2024-04-10 18:09:11')
+				this.$set(this.otherData, 'patient_name', userInfo.userName)		
 			}
 		},
 		methods: {
@@ -160,8 +157,7 @@
 								...that.otherData,
 								nurse: store.state.nurse,
 								score_sum: scoreSum,
-								
-							
+								created_at: store.state.created_at	
 						},
 						header: {},
 						success: (res) => {

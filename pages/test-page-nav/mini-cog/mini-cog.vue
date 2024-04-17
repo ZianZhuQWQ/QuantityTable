@@ -100,14 +100,14 @@
 				else if (type == 'submit') {
 					// 判断是否有分数
 					if (!Object.keys(this.secondQuestion).includes('result')) {
-					// if (!this.secondQuestion.result || this.secondQuestion.result.length === 0) {
+						// if (!this.secondQuestion.result || this.secondQuestion.result.length === 0) {
 						this.current = 2;
 						uni.showToast({
 							title: '请上传图片后，并选择结果',
 							icon: 'none'
 						})
-						} else if (!Object.keys(this.thirdQuestion).includes('result')) {
-					// } else if (!this.thirdQuestion.result || this.thirdQuestion.result.length === 0) {
+					} else if (!Object.keys(this.thirdQuestion).includes('result')) {
+						// } else if (!this.thirdQuestion.result || this.thirdQuestion.result.length === 0) {
 
 						this.current = 3;
 						uni.showToast({
@@ -150,9 +150,9 @@
 
 						// console.log("Formatted Date and Time: " + formattedDateTime);
 
-						const date = new Date(); // 获取当前日期和时间
-						const formattedDate =
-							`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}-${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+						// const date = new Date(); // 获取当前日期和时间
+						// const formattedDate =
+						// 	`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}-${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 
 						uni.uploadFile({
 							url: 'http://47.113.91.80:8002/quest/uploadQuest2',
@@ -167,22 +167,28 @@
 								score3: this.thirdQuestion.result[0],
 								nurse: store.state.nurse,
 								score_sum: scoreSum,
-								created_at: formattedDate
+								created_at: store.state.created_at
 							},
 							timeout: 6000,
 							header: {},
 							success: (res) => {
-								if (res.data) {
-									console.log('res', res)
-									console.log('res.data', res.data)
-									// this.formData = res.data.data[0]
-									// console.log('this.formData',this.formData)
-
-								}
-								// uni.hideLoading()
+								// 标记已完成
+								store.commit('markCompleted', 'mini-cog')
+								// 注入仓库
+								store.commit('setMiniCogData', {
+									...this.formData
+								})
+								uni.hideLoading()
+								uni.showToast({
+									title: "提交成功",
+									icon: 'success'
+								})
+								uni.navigateTo({
+									url: `/pages/test-page-nav/test-page-nav?userName=${that.otherData?.patient_name}&userId=${that.otherData?.patient_id}`
+								});
 							},
 							fail(err) {
-								// uni.hideLoading()
+								uni.hideLoading()
 								uni.showToast({
 									title: "操作失败，请重试!" + (!!err.errMsg && '\n' + err.errMsg),
 									icon: 'none'
@@ -261,12 +267,12 @@
 							this.score_sum = res.data.data[0].score_sum
 							console.log('this.score_sum', this.score_sum)
 
-							
+
 
 
 
 							const baseUrl = 'http://47.113.91.80:8002/';
-							
+
 							// // const filePath = res.data.data[0].img1
 							// // const fileUrl = baseUrl + filePath.replace(/^\.\//, '');
 							// // this.secondQuestion.vedioPath = fileUrl
@@ -287,10 +293,11 @@
 							// 	result: res.data.data[0].score2,
 							// 	vedioPath: baseUrl+res.data.data[0].img1.replace(/^\.\//, ''),
 							// }
-							
+
 							this.$set(this.secondQuestion, 'result', res.data.data[0].score2)
-							this.$set(this.secondQuestion, 'videoPath', baseUrl+res.data.data[0].img1.replace(/^\.\//, ''))
-							
+							this.$set(this.secondQuestion, 'videoPath', baseUrl + res.data.data[0].img1
+								.replace(/^\.\//, ''))
+
 							console.log('this.secondQuestion', this.secondQuestion)
 							console.log('this.secondQuestion.result', this.secondQuestion.result)
 							console.log('this.secondQuestion.videoPath', this.secondQuestion.videoPath)

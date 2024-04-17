@@ -15,9 +15,9 @@
 					</template>
 				</view>
 
-				<view class="score" v-if="isDetail">
+				<!-- <view class="score" v-if="isDetail">
 					总得分：{{ score }}
-				</view>
+				</view> -->
 			</scroll-view>
 
 			<!-- 按钮区域 -->
@@ -59,8 +59,33 @@
 				// 		'{"pationt_name":"孙安","sex":"1","age":"25","bmi":"100","birthplace":"海南昌江","address":"广州","city":"city","career":"1","drug":"0","drug_history":"虚无","smoke":"0","hobby":"3","hobby_puzzle":"很多","patient_id":"1","nurse":"1","created_at":"zza","score_sum":"1","hobby_music":"音乐","hobby_Instrument":"乐器","hobby_others":"其他","habit_dietary":"1","habit_brushteeth":"1"," habit_stayup":"0","habit_sleep":"2","personality":"0","finance":"1","hypertension":"0","cad":"1","cad_medicine":"1","diabetes":"1","diabetes_control":"0","diabetes_medicine":"2","hereditary":"0","hereditary_others":"虚"}'
 				// 	) || store.state.evaluateFormData || {})
 				// },
+
 				formData: {}
+
+				// formData = {
+				// ...(JSON.parse('{"patient_name": "-1", "patient_id": "-1", "nurse": "-1", "created_at": "-1",
+				// 		"score_sum": "-1", "age": "-1", "sex": "-1", "bmi": "-1", "birthplace": "-1", "address": "-1",
+				// 		"city": "-1", "diabetes": "-1", "diabetes_control": "-1", "diabetes_medicine": "-1",
+				// 		"hereditary": "-1", "hereditary_others": "-1"
+				// 		}
+				// 		'))
+				// 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
 			}
+
+
 		},
 		computed: {
 			inputDisabled() {
@@ -84,10 +109,6 @@
 				const userInfo = JSON.parse(option.userInfo)
 				this.$set(this.otherData, 'patient_id', userInfo.userId)
 				this.$set(this.otherData, 'patient_name', userInfo.userName)
-
-
-				// this.$set(this.otherData, 'created_at', '2024-04-10 18:09:11')
-
 			}
 		},
 		methods: {
@@ -122,20 +143,55 @@
 						icon: 'none'
 					})
 				} else {
+					store.state.evaluateFormItems.forEach((item) => {
+						if (this.formData[item.key] === undefined || this.formData[item.key] === '') {
+							this.formData[item.key] = '-1';
+						}
+					});
+
+
 					let that = this
-					let scoreSum = 0;
-					that.items.forEach(item => {
-						scoreSum += Number(that.formData[item.key]) || 0;
-					})
-					this.score = scoreSum
+					// let scoreSum = 0;
+					// that.items.forEach(item => {
+					// 	scoreSum += Number(that.formData[item.key]) || 0;
+					// })
+					// this.score = scoreSum
+
+
+					// const str = "1.6,50";
+
+					// 使用正则表达式提取字符串中的数字（包括浮点数和整数）
+					const numbers = that.formData.bmi.match(/\d+(\.\d+)?/g).map(Number)
+
+					console.log(numbers)
+
+					const bmi = (numbers[1] / (numbers[0]) ** 2).toFixed(2)
+
+
+					this.$set(that.formData, 'bmi', bmi)
+
+					console.log('that.formData.bmi', that.formData.bmi)
+
+
+
+					const date = new Date(); // 获取当前日期和时间
+					const formattedDate =
+						// `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}-${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+						`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+
+					that.$set(that.formData, 'created_at', formattedDate)
+					store.commit('setCreatedAt', formattedDate)
+
+
+
 					uni.showLoading({
 						title: '正在提交...'
 					})
-					this.$set(this.formData, 'created_at', '2024-04-10 18:09:11')
+
 					console.log(that.otherData)
 					console.log(that.formData)
 					console.log(store.state.nurse)
-					console.log(scoreSum)
+
 					// 网络请求
 					uni.request({
 						url: 'http://47.113.91.80:8002/quest/uploadQuest1',
@@ -146,8 +202,8 @@
 							...that.formData,
 							...that.otherData,
 							nurse: store.state.nurse,
-							
-							score_sum: scoreSum,
+
+
 
 						},
 						header: {},
@@ -227,8 +283,8 @@
 						if (res.data) {
 							console.log('res', res)
 							console.log('res.data', res.data)
-							
-							
+
+
 							this.formData = res.data.data[0]
 							console.log('this.formData', this.formData)
 

@@ -122,22 +122,22 @@
 						icon: 'none'
 					})
 				} else {
-					// let that = this
+					let that = this
 					let scoreSum = 0;
-					this.items.forEach(item => {
-						scoreSum += Number(this.formData[item.key]) || 0;
+					that.items.forEach(item => {
+						scoreSum += Number(that.formData[item.key]) || 0;
 					})
-					this.score = scoreSum
-					console.log('ssssssssssssssssss', this.score)
+					that.score = scoreSum
+					console.log('ssssssssssssssssss', that.score)
 
-					// 调保存接口TODO
-					uni.showLoading({
-						title: '正在提交...'
-					})
-					console.log(this.otherData)
-					console.log('this.formData', this.formData)
-					const img = this.formData.linguistic4_4_img
-					console.log('this.formData.linguistic4_4_img', this.formData.linguistic4_4_img)
+					// // 调保存接口TODO
+					// uni.showLoading({
+					// 	title: '正在提交...'
+					// })
+					console.log(that.otherData)
+					console.log('that.formData', that.formData)
+					const img = that.formData.linguistic4_4_img
+					console.log('that.formData.linguistic4_4_img', that.formData.linguistic4_4_img)
 					console.log('img', img)
 
 					console.log(store.state.nurse)
@@ -187,21 +187,10 @@
 
 
 
-					const date = new Date(); // 获取当前日期和时间
-					const formattedDate =
-						`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}-${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+					// const date = new Date(); // 获取当前日期和时间
+					// const formattedDate =
+					// 	`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}-${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 
-					console.log('我生气了啊啊啊啊', this.otherData.patient_id,
-						this.otherData.patient_name,
-						this.otherData.age,
-						this.otherData.sex,
-						this.otherData.mobile,
-						this.otherData.education,
-						this.otherData.address,
-						store.state.nurse,
-						scoreSum,
-						formattedDate,
-						img)
 
 					uni.uploadFile({
 						url: 'http://47.113.91.80:8002/quest/uploadQuest4',
@@ -216,29 +205,38 @@
 							// sex: this.otherData.mobile,
 							// education: this.otherData.education,
 							// address: this.otherData.address,
-							
-							
-							...this.otherData,
-							...this.formData,
+
+
+							...that.otherData,
+							...that.formData,
 
 							nurse: store.state.nurse,
 							score_sum: scoreSum,
-							created_at: formattedDate,
+							created_at: store.state.created_at,
+
 						},
 						timeout: 6000,
 						header: {},
 						success: (res) => {
-							if (res.data) {
-								console.log('res', res)
-								console.log('res.data', res.data)
-								// this.formData = res.data.data[0]
-								// console.log('this.formData',this.formData)
-
-							}
-							// uni.hideLoading()
+							this.$set(this.secondQuestion, 'videoPath', baseUrl + res.data.data[0].img1
+								.replace(/^\.\//, ''))
+							// 标记已完成
+							store.commit('markCompleted', 'mmse')
+							// 注入仓库
+							store.commit('setMmseData', {
+								...this.formData
+							})
+							uni.hideLoading()
+							uni.showToast({
+								title: "提交成功",
+								icon: 'success'
+							})
+							uni.navigateTo({
+								url: `/pages/test-page-nav/test-page-nav?userName=${that.otherData?.patient_name}&userId=${that.otherData?.patient_id}`
+							});
 						},
 						fail(err) {
-							// uni.hideLoading()
+							uni.hideLoading()
 							uni.showToast({
 								title: "操作失败，请重试!" + (!!err.errMsg && '\n' + err.errMsg),
 								icon: 'none'
@@ -279,17 +277,24 @@
 					method: 'POST',
 					data: {
 
-						...that.otherData,
-
+						patient_id: that.otherData.patient_id,
+						created_at: store.state.result_created_at
 					},
 					timeout: 6000,
 					header: {},
 					success: (res) => {
+
 						if (res.data) {
 							console.log('res', res)
 							console.log('res.data', res.data)
 							this.formData = res.data.data[0]
 							console.log('this.formData', this.formData)
+
+							const baseUrl = 'http://47.113.91.80:8002/';
+							this.$set(this.formData, 'linguistic4_4_img', baseUrl + res.data.data[0].img
+								.replace(/^\.\//, ''))
+
+
 
 						}
 						uni.hideLoading()

@@ -9,7 +9,9 @@ const store = new Vuex.Store({
 	state: { //存放状态
 		nurse: '', // 登录成功存放护士id
 
-		result_created_at: '',
+		created_at: '', //五个表的登录时间
+
+		result_created_at: '', //老人某次的getQuest
 
 		minicog_score2: '',
 
@@ -61,7 +63,7 @@ const store = new Vuex.Store({
 			// 	type: 'number'
 			// },
 			{
-				label: 'bmi',
+				label: 'bmi[请输入身高体重，例如：1.6,45 ]',
 				key: 'bmi',
 				type: 'number'
 			},
@@ -256,7 +258,7 @@ const store = new Vuex.Store({
 			},
 			{
 				label: '兴趣爱好_乐器',
-				key: 'hobby_Instrument',
+				key: 'hobby_instrument',
 				type: 'input'
 			},
 			{
@@ -266,7 +268,7 @@ const store = new Vuex.Store({
 			},
 			{
 				label: '饮食习惯',
-				key: 'habit_dietary',
+				key: 'habit_diet',
 				type: 'radio',
 				options: [{
 					label: '高盐高脂',
@@ -1340,6 +1342,9 @@ const store = new Vuex.Store({
 		},
 		setNurse(state, nurseId) {
 			state.nurse = nurseId
+		},
+		setCreatedAt(state, created_at) {
+			state.created_at = created_at
 		},
 		setResultCreatedAt(state, result_created_at) {
 			state.result_created_at = result_created_at
