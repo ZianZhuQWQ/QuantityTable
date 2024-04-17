@@ -67,6 +67,7 @@
 					sourceType: ['album', 'camera'], // album 从相册选图，camera 使用相机，默认二者都有
 					success: function(res) {
 						that.$emit('onChange', res.tempFilePaths?.[0])
+						console.log(' res.tempFilePaths?.[0]', res.tempFilePaths?.[0])
 					}
 				})
 			},

@@ -8,13 +8,15 @@
 
 			<!-- 视频 -->
 			<upload-video :value="value.videoPath" @onChange="onChange" :disable="isDetail" />
+<!-- 			<upload-video :value="videoPath" @onChange="onChange" :disable="isDetail" /> -->
+			<!-- <upload-video v-model="videoPath" @onchange="onchange" :disable="isDetail" /> -->
 
 			<!-- 删除按钮 -->
 			<view v-if="!!videoPath && !isDetail" class='deleteBtn' @click='handleDelete'>
 				删除重新拍摄
 			</view>
 
-			<view class="result" >
+			<view class="result">
 				<view class="label"> 结果
 					答对个数：
 				</view>
@@ -58,6 +60,7 @@
 				handler(newValue, oldValue) {
 					this.videoPath = newValue.videoPath;
 					this.result = newValue.result;
+					console.log('newValue_two', newValue)
 				}
 			},
 		},

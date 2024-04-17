@@ -9,9 +9,7 @@
 			<!-- 第二题画图 -->
 			<uploadVideo v-if="current == 2 || isDetail" @onChange="handleSaveVideo" :value="secondQuestion"
 				:isDetail="isDetail" />
-				
-			
-			
+
 			<!-- 第三题录音 -->
 			<recordingThree v-if="current == 3 || isDetail" @onChange="handleSaveRecording" :value="thirdQuestion"
 				:isDetail="isDetail" />
@@ -62,7 +60,7 @@
 				},
 				secondQuestion: {
 					videoPath: '',
-					result: []
+					// result: []
 				},
 				otherData: {
 					patient_id: '',
@@ -70,7 +68,7 @@
 				},
 				thirdQuestion: {
 					voicePath: '',
-					result: []
+					// result: []
 				},
 
 			}
@@ -101,15 +99,15 @@
 				else if (type == 'down') this.current -= 1;
 				else if (type == 'submit') {
 					// 判断是否有分数
-					// if (!Object.keys(this.secondQuestion).includes('result')) {
-					if (!this.secondQuestion.result || this.secondQuestion.result.length === 0) {
+					if (!Object.keys(this.secondQuestion).includes('result')) {
+					// if (!this.secondQuestion.result || this.secondQuestion.result.length === 0) {
 						this.current = 2;
 						uni.showToast({
 							title: '请上传图片后，并选择结果',
 							icon: 'none'
 						})
-						// } else if (!Object.keys(this.thirdQuestion).includes('result')) {
-					} else if (!this.thirdQuestion.result || this.thirdQuestion.result.length === 0) {
+						} else if (!Object.keys(this.thirdQuestion).includes('result')) {
+					// } else if (!this.thirdQuestion.result || this.thirdQuestion.result.length === 0) {
 
 						this.current = 3;
 						uni.showToast({
@@ -130,7 +128,7 @@
 						console.log('this.firstQuestion', this.firstQuestion)
 						console.log('this.secondQuestion', this.secondQuestion)
 						console.log('this.secondQuestion.result', this.secondQuestion.result[0])
-						console.log('this.secondQuestion.videoPath', this.secondQuestion.videoPath)
+						console.log('uploadQuest2this.secondQuestion.videoPath', this.secondQuestion.videoPath)
 						console.log('this.thirdQuestion', this.thirdQuestion)
 
 						console.log('this.otherData', this.otherData)
@@ -263,35 +261,45 @@
 							this.score_sum = res.data.data[0].score_sum
 							console.log('this.score_sum', this.score_sum)
 
-							console.log('this.secondQuestion', this.secondQuestion)
-							console.log('this.secondQuestion.result', this.secondQuestion.result)
+							
 
 
-							this.secondQuestion.result = res.data.data[0].score2
-							
-							
+
 							const baseUrl = 'http://47.113.91.80:8002/';
-							const filePath = res.data.data[0].img1
-							const fileUrl = baseUrl + filePath.replace(/^\.\//, '');
 							
-							this.secondQuestion.vedioPath = fileUrl
-							console.log(this.secondQuestion.vedioPath);
-							
-							
-							
-							
-							this.thirdQuestion.result = res.data.data[0].score3
+							// // const filePath = res.data.data[0].img1
+							// // const fileUrl = baseUrl + filePath.replace(/^\.\//, '');
+							// // this.secondQuestion.vedioPath = fileUrl
+							// // console.log(this.secondQuestion.vedioPath);
+
+							// this.$set(this.secondQuestion, 'vedioPath', baseUrl + res.data.data[0].img1
+							// 	.replace(/^\.\//, ''))
+							// console.log('console.log(this.secondQuestion.vedioPath);', this.secondQuestion
+							// 	.vedioPath);
+
+
+
+
+							this.$set(this.thirdQuestion, 'result', res.data.data[0].score3)
 							// store.commit('setMiniCogScore2', score2)
 
-
-							console.log('this.secondQuestion.result', this.secondQuestion.result[0])
+							// this.secondQuestion = {
+							// 	result: res.data.data[0].score2,
+							// 	vedioPath: baseUrl+res.data.data[0].img1.replace(/^\.\//, ''),
+							// }
+							
+							this.$set(this.secondQuestion, 'result', res.data.data[0].score2)
+							this.$set(this.secondQuestion, 'videoPath', baseUrl+res.data.data[0].img1.replace(/^\.\//, ''))
+							
+							console.log('this.secondQuestion', this.secondQuestion)
+							console.log('this.secondQuestion.result', this.secondQuestion.result)
+							console.log('this.secondQuestion.videoPath', this.secondQuestion.videoPath)
 
 							// this.secondQuestion.result[0]=res.data.data[0].score2
 							// // this.formData = res.data.data[0]
 
 
 
-							// console.log('this.secondQuestion.result', this.secondQuestion.result)
 
 						}
 						uni.hideLoading()

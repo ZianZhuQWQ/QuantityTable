@@ -95,7 +95,7 @@
 				this.$set(this.otherData, 'mobile', '12839483948')
 				this.$set(this.otherData, 'education', '本科')
 				this.$set(this.otherData, 'address', '广东东莞')
-				this.$set(this.otherData, 'created_at', '2024-04-10 18:09:11')
+				// 	this.$set(this.otherData, 'created_at', '2024-04-10 18:09:11')
 			}
 		},
 		methods: {
@@ -122,10 +122,10 @@
 						icon: 'none'
 					})
 				} else {
-					let that = this
+					// let that = this
 					let scoreSum = 0;
-					that.items.forEach(item => {
-						scoreSum += Number(that.formData[item.key]) || 0;
+					this.items.forEach(item => {
+						scoreSum += Number(this.formData[item.key]) || 0;
 					})
 					this.score = scoreSum
 					console.log('ssssssssssssssssss', this.score)
@@ -134,42 +134,111 @@
 					uni.showLoading({
 						title: '正在提交...'
 					})
-					console.log(that.otherData)
-					console.log(that.formData)
+					console.log(this.otherData)
+					console.log('this.formData', this.formData)
+					const img = this.formData.linguistic4_4_img
+					console.log('this.formData.linguistic4_4_img', this.formData.linguistic4_4_img)
+					console.log('img', img)
+
 					console.log(store.state.nurse)
 					console.log(scoreSum)
-					// 网络请求
-					uni.request({
-						url: 'http://47.113.91.80:8002/quest/uploadQuest4',
-						method: 'POST',
-						data: {
 
-							...that.otherData,
-							...that.formData,
+
+					// 网络请求
+					// uni.request({
+					// 	url: 'http://47.113.91.80:8002/quest/uploadQuest4',
+					// 	method: 'POST',
+					// 	data: {
+
+					// 		...that.otherData,
+					// 		...that.formData,
+					// 		nurse: store.state.nurse,
+					// 		score_sum: scoreSum,
+
+					// 	},
+					// 	header: {},
+
+					// 	success: (res) => {
+					// 		// 标记已完成
+					// 		store.commit('markCompleted', 'mmse')
+					// 		// 注入仓库
+					// 		store.commit('setMmseData', {
+					// 			...this.formData
+					// 		})
+					// 		uni.hideLoading()
+					// 		uni.showToast({
+					// 			title: "提交成功",
+					// 			icon: 'success'
+					// 		})
+					// 		uni.navigateTo({
+					// 			url: `/pages/test-page-nav/test-page-nav?userName=${that.otherData?.patient_name}&userId=${that.otherData?.patient_id}`
+					// 		});
+					// 	},
+					// 	fail(err) {
+					// 		uni.hideLoading()
+					// 		uni.showToast({
+					// 			title: "操作失败，请重试!" + (!!err.errMsg && '\n' + err.errMsg),
+					// 			icon: 'none'
+					// 		})
+					// 	}
+					// });
+
+
+
+
+
+					const date = new Date(); // 获取当前日期和时间
+					const formattedDate =
+						`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}-${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
+
+					console.log('我生气了啊啊啊啊', this.otherData.patient_id,
+						this.otherData.patient_name,
+						this.otherData.age,
+						this.otherData.sex,
+						this.otherData.mobile,
+						this.otherData.education,
+						this.otherData.address,
+						store.state.nurse,
+						scoreSum,
+						formattedDate,
+						img)
+
+					uni.uploadFile({
+						url: 'http://47.113.91.80:8002/quest/uploadQuest4',
+						filePath: img,
+						name: 'img',
+						method: 'POST',
+						formData: {
+							// patient_id: this.otherData.patient_id,
+							// patient_name: this.otherData.patient_name,
+							// age: this.otherData.age,
+							// sex: this.otherData.sex,
+							// sex: this.otherData.mobile,
+							// education: this.otherData.education,
+							// address: this.otherData.address,
+							
+							
+							...this.otherData,
+							...this.formData,
+
 							nurse: store.state.nurse,
 							score_sum: scoreSum,
-
+							created_at: formattedDate,
 						},
+						timeout: 6000,
 						header: {},
-
 						success: (res) => {
-							// 标记已完成
-							store.commit('markCompleted', 'mmse')
-							// 注入仓库
-							store.commit('setMmseData', {
-								...this.formData
-							})
-							uni.hideLoading()
-							uni.showToast({
-								title: "提交成功",
-								icon: 'success'
-							})
-							uni.navigateTo({
-								url: `/pages/test-page-nav/test-page-nav?userName=${that.otherData?.patient_name}&userId=${that.otherData?.patient_id}`
-							});
+							if (res.data) {
+								console.log('res', res)
+								console.log('res.data', res.data)
+								// this.formData = res.data.data[0]
+								// console.log('this.formData',this.formData)
+
+							}
+							// uni.hideLoading()
 						},
 						fail(err) {
-							uni.hideLoading()
+							// uni.hideLoading()
 							uni.showToast({
 								title: "操作失败，请重试!" + (!!err.errMsg && '\n' + err.errMsg),
 								icon: 'none'
