@@ -94,8 +94,8 @@
 
 				isAddUser: false,
 				addUserInfo: {
-					userName: '',
-					phoneNumber: ''
+					userName: 'ZZH',
+					phoneNumber: '19029384750'
 				},
 
 
@@ -306,6 +306,12 @@
 					uni.showLoading({
 						title: '正在新建...'
 					})
+					
+					
+					const date = new Date(); // 获取当前日期和时间
+					const formattedDate =
+						`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+						
 					uni.request({
 						url: 'http://47.113.91.80:8002/quest/patientRegister',
 						method: 'POST',
@@ -314,7 +320,7 @@
 							name: that.addUserInfo.userName,
 							mobile: that.addUserInfo.phoneNumber,
 							nurse_id: store.state.nurse,
-							created_at: that.created_at,
+							created_at: formattedDate,
 
 						},
 						header: {},

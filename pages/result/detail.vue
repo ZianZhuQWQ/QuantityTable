@@ -4,7 +4,7 @@
 
 		<view class="content-wrap">
 			<view class="user-info">
-				<image class="avatar" :src="userInfo.avatar || '../../static/old.png'" />
+				<image class="avatar" src="../../static/old.png" />
 				<view class="user-name">
 					{{ userInfo.userName || '' }}
 				</view>
@@ -46,13 +46,14 @@
 				current: 1,
 				score: 0,
 				userInfo: {
-					avatar: '',
+					userId: '',
 					userName: ''
-				}
+				},
 			}
 		},
 		onLoad: function(option) { // option为object类型，会序列化上个页面传递的参数
-			this.$set(this.userInfo, 'userName', option.username)
+			this.$set(this.userInfo, 'userId', option.userId)
+			this.$set(this.userInfo, 'userName', option.userName)
 		},
 		methods: {
 			// 切换页面

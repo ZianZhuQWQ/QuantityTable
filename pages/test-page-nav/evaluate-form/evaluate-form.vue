@@ -255,7 +255,10 @@
 			// 跳转到第二张表详情
 			gotoMiniCogDetail() {
 				uni.navigateTo({
-					url: '/pages/test-page-nav/mini-cog/mini-cog?isDetail=1'
+					url: '/pages/test-page-nav/mini-cog/mini-cog?isDetail=1' + `&userInfo=${JSON.stringify({
+									userId: this.otherData?.patient_id,
+									userName: this.otherData?.patient_name,
+								})}`
 				});
 			},
 			// 获取详情数据

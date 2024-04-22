@@ -18,7 +18,10 @@
 
 
 				<view class="score" v-if="isDetail">
-					总得分：{{ score }}
+					总得分：{{ scoreRosen }}
+				</view>
+				<view class="score" v-if="isDetail">
+					总得分：{{ scoreHachinski }}
 				</view>
 			</scroll-view>
 
@@ -64,8 +67,9 @@
 					patient_id: '',
 					patient_name: '',
 				},
-				formData:{},
-				score: 0, // 总得分
+				formData: {},
+				scoreRosen: 0, // 总得分
+				scoreHachinski: 0, // 总得分
 			}
 		},
 		computed: {
@@ -86,7 +90,7 @@
 			if (option.userInfo) {
 				const userInfo = JSON.parse(option.userInfo)
 				this.$set(this.otherData, 'patient_id', userInfo.userId)
-				this.$set(this.otherData, 'patient_name', userInfo.userName)		
+				this.$set(this.otherData, 'patient_name', userInfo.userName)
 			}
 		},
 		methods: {
@@ -132,32 +136,42 @@
 					})
 					// this.formData["hachinski_score_sum"] = hachinskiScoreSum
 					// this.formData["rosen_score_sum"] = rosenScoreSum
+
+					this.formData["score_h"] = hachinskiScoreSum
+					this.formData["score_r"] = rosenScoreSum
+					// this.scoreRosen = rosenScoreSum
+					// this.scoreHachinski = hachinskiScoreSum
+
+					console.log('this.scoreRosen', this.scoreRosen)
+					console.log('this.scoreHachinski', this.scoreHachinski)
+
+
+
 					let that = this
-					
-					let scoreSum = 0;
-					that.items.forEach(item => {
-						scoreSum += Number(that.formData[item.key]) || 0;
-					})
-					this.score=scoreSum
-					
+
+					// let scoreSum = 0;
+					// that.items.forEach(item => {
+					// 	scoreSum += Number(that.formData[item.key]) || 0;
+					// })
+					// this.score=scoreSum
+
 					uni.showLoading({
 						title: '正在提交...'
 					})
 					console.log(that.otherData)
 					console.log(that.formData)
 					console.log(store.state.nurse)
-					console.log(scoreSum)
+
 					// 网络请求
 					uni.request({
 						url: 'http://47.113.91.80:8002/quest/uploadQuest3', //仅为示例，并非真实接口地址。
 						method: 'POST',
 						data: {
-							
-								...that.formData,
-								...that.otherData,
-								nurse: store.state.nurse,
-								score_sum: scoreSum,
-								created_at: store.state.created_at	
+
+							...that.formData,
+							...that.otherData,
+							nurse: store.state.nurse,
+							created_at: store.state.created_at
 						},
 						header: {},
 						success: (res) => {
@@ -208,10 +222,10 @@
 			// 跳转上下详情页
 			gotoDetail(url) {
 				uni.navigateTo({
-					url: url + '?isDetail=1'
+					url: url + '?userName=${this.userInfo.userName}&userId=${this.userInfo.userId}&isDetail=1'
 				});
 			},
-			
+
 			// 获取详情数据
 			getDetailData() {
 				let that = this
@@ -219,25 +233,28 @@
 				uni.showLoading({
 					title: '正在获取数据...'
 				})
-			
-			
+
+
 				uni.request({
 					url: 'http://47.113.91.80:8002/quest/getQuest3',
 					method: 'POST',
 					data: {
-			
+
 						...that.otherData,
-			
+						created_at: store.state.result_created_at
+
 					},
 					timeout: 6000,
 					header: {},
 					success: (res) => {
 						if (res.data) {
 							console.log('res', res)
-							console.log('res.data',res.data)
+							console.log('res.data', res.data)
 							this.formData = res.data.data[0]
-							console.log('this.formData',this.formData)
-							
+							console.log('this.formData', this.formData)
+							this.scoreRosen = res.data.data[0].score_r
+							this.scoreHachinski = res.data.data[0].score_h
+
 						}
 						uni.hideLoading()
 					},

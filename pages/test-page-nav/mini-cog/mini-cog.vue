@@ -86,6 +86,7 @@
 		},
 		onLoad: function(option) { // option为object类型，会序列化上个页面传递的参数
 			this.isDetail = !!Number(option.isDetail);
+			console.log('this.isDetail', this.isDetail)
 			if (option.userInfo) {
 				const userInfo = JSON.parse(option.userInfo)
 				this.$set(this.otherData, 'patient_id', userInfo.userId)
@@ -172,6 +173,7 @@
 							timeout: 6000,
 							header: {},
 							success: (res) => {
+
 								// 标记已完成
 								store.commit('markCompleted', 'mini-cog')
 								// 注入仓库
@@ -238,7 +240,10 @@
 			// 跳转上下详情页
 			gotoDetail(url) {
 				uni.navigateTo({
-					url: url + '?isDetail=1'
+					url: url + '?isDetail=1' + `&userInfo=${JSON.stringify({
+									userId: this.otherData?.patient_id,
+									userName: this.otherData?.patient_name,
+								})}`
 				});
 			},
 			getDetailData() {
@@ -282,7 +287,6 @@
 							// 	.replace(/^\.\//, ''))
 							// console.log('console.log(this.secondQuestion.vedioPath);', this.secondQuestion
 							// 	.vedioPath);
-
 
 
 

@@ -218,8 +218,7 @@
 						timeout: 6000,
 						header: {},
 						success: (res) => {
-							this.$set(this.secondQuestion, 'videoPath', baseUrl + res.data.data[0].img1
-								.replace(/^\.\//, ''))
+
 							// 标记已完成
 							store.commit('markCompleted', 'mmse')
 							// 注入仓库
@@ -260,7 +259,10 @@
 			// 跳转上下详情页
 			gotoDetail(url) {
 				uni.navigateTo({
-					url: url + '?isDetail=1'
+					url: url + '?isDetail=1' + `&userInfo=${JSON.stringify({
+									userId: this.otherData?.patient_id,
+									userName: this.otherData?.patient_name,
+								})}`
 				});
 			},
 			// 获取详情数据
