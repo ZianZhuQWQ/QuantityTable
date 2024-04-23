@@ -189,7 +189,7 @@
 					})
 
 					console.log(that.otherData)
-					console.log(that.formData)
+					console.log('1111111111111111',that.formData)
 					console.log(store.state.nurse)
 
 					// 网络请求

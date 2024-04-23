@@ -139,11 +139,12 @@
 
 					this.formData["score_h"] = hachinskiScoreSum
 					this.formData["score_r"] = rosenScoreSum
+					
 					// this.scoreRosen = rosenScoreSum
 					// this.scoreHachinski = hachinskiScoreSum
-
-					console.log('this.scoreRosen', this.scoreRosen)
-					console.log('this.scoreHachinski', this.scoreHachinski)
+					
+					console.log('rosenScoreSum', rosenScoreSum)
+					console.log('hachinskiScoreSum', hachinskiScoreSum)
 
 
 

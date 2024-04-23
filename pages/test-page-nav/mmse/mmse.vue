@@ -125,7 +125,10 @@
 					let that = this
 					let scoreSum = 0;
 					that.items.forEach(item => {
+						
 						scoreSum += Number(that.formData[item.key]) || 0;
+						console.log('this.formData[item.key]',this.formData[item.key])
+						console.log('scoreSum',scoreSum)
 					})
 					that.score = scoreSum
 					console.log('ssssssssssssssssss', that.score)

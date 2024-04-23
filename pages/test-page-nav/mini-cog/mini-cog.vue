@@ -136,6 +136,15 @@
 
 
 						let scoreSum = 0;
+						this.items.forEach(item => {
+							
+							scoreSum += Number(this.formData[item.key]) || 0;
+							console.log('this.formData[item.key]',this.formData[item.key])
+							console.log('scoreSum',scoreSum)
+						})
+						this.score = scoreSum
+						console.log('ssssssssssssssssss', this.score)
+						
 						// let createdDateTime = new Date().toISOString(); // 获取当前时间并转换为ISO 8601格式
 						// var date = new Date();
 

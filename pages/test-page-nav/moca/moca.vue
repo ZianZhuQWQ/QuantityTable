@@ -64,7 +64,7 @@
 			return {
 				current: 1,
 				isDetail: false,
-				score: 1, // 总得分
+				score: 0, // 总得分
 				formData: {},
 				otherData: {
 					patient_id: '',
@@ -90,7 +90,7 @@
 
 
 
-				// this.$set(this.otherData, 'created_at', '2024-04-10 18:09:11')
+
 			}
 		},
 		methods: {
@@ -118,32 +118,58 @@
 				} else {
 					let that = this
 					let scoreSum = 0;
+					let visual_exec3 = 0;
+					let visual_exec_sum = 0;
+					let christen_sum = 0;
+					let attention1_2_sum = 0;
+					let language1_2_sum = 0;
+					let abstract_sum = 0;
 
-					that.items.forEach(item => {
+					that.items.forEach((item, index) => {
+						let currentSource = 0;
 						if (!!item.result.customComputation) {
-							scoreSum += item.result.customComputation(that.formData[item.key])
+							currentSource = item.result.customComputation(that.formData[item.key])
 						} else if (item.result.type == 'checkbox') {
 							that.formData[item.key]?.forEach((value) => {
-								scoreSum += Number(value) || 0
+								currentSource += Number(value) || 0
 							})
+						} else if (typeof Number(this.formData[item.key]) == 'number') {
+							currentSource = Number(this.formData[item.key]) || 0
 						} else
-							scoreSum += Number(that.formData[item.key]) || 0;
+							currentSource = Number(that.formData[item.key]) || 0;
+						scoreSum += currentSource;
+						if ([1, 2].includes(index + 1)) {
+							visual_exec_sum += currentSource
+							console.log('visual_exec_sum', visual_exec_sum)
+						} else if ([4, 5, 6].includes(index + 1)) {
+							christen_sum += currentSource
+							console.log('christen_sum', christen_sum)
+						} else if ([7, 8, 9, 10].includes(index + 1)) {
+							attention1_2_sum += currentSource
+							console.log('attention1_2_sum', attention1_2_sum)
+						} else if ([11, 12, 13].includes(index + 1)) {
+							language1_2_sum += currentSource
+							console.log('language1_2_sum', language1_2_sum)
+						} else if ([14, 15].includes(index + 1)) {
+							abstract_sum += currentSource
+							console.log('abstract_sum', abstract_sum)
+						}
 					})
-					this.score = scoreSum
-					console.log('this.score', this.score, 'scoreSum', scoreSum)
 
-					console.log('this.score', this.score)
+					this.score = scoreSum
+					visual_exec_sum = visual_exec_sum + visual_exec3
+					console.log('visual_exec_summmmmmmmmmmmmmmmmmmmmm', visual_exec_sum)
 
 					// 调保存接口TODO
 					uni.showLoading({
 						title: '正在提交...'
 					})
 
-					this.$set(that.formData, 'visual_exec_sum', '2')
-					this.$set(that.formData, 'attention1_2_sum', '2')
-					this.$set(that.formData, 'christen_sum', '2')
-					this.$set(that.formData, 'language1_2_sum', '2')
-					this.$set(that.formData, 'abstract_sum', '2')
+					this.$set(that.formData, 'visual_exec_sum', visual_exec_sum)
+					this.$set(that.formData, 'attention1_2_sum', attention1_2_sum)
+					this.$set(that.formData, 'christen_sum', christen_sum)
+					this.$set(that.formData, 'language1_2_sum', language1_2_sum)
+					this.$set(that.formData, 'abstract_sum', abstract_sum)
 
 					console.log(that.otherData)
 					console.log(that.formData)
@@ -199,20 +225,20 @@
 							})
 						}
 					});
-					
+
 					uni.request({
 						url: 'http://47.113.91.80:8002/quest/uploadQuestList',
 						method: 'POST',
 						timeout: 15000,
 						data: {
-					
+
 							...that.otherData,
 							nurse: store.state.nurse,
-							created_at:store.state.created_at
+							created_at: store.state.created_at
 						},
 						header: {},
 						success: (res) => {
-							
+
 							uni.hideLoading()
 							uni.showToast({
 								title: "提交成功",
@@ -230,7 +256,7 @@
 							})
 						}
 					});
-					
+
 					// uni.request({
 					// 	url: 'http://47.113.91.80:8002/quest/uploadQuest5',
 					// 	method: 'POST',
@@ -441,10 +467,20 @@
 							console.log('this.formData', that.formData)
 
 							const baseUrl = 'http://47.113.91.80:8002/';
-		
-							this.$set(this.formData, 'visual_exec1_img', baseUrl + res.data.data[0].img1.replace(/^\.\//, ''))
-							this.$set(this.formData, 'visual_exec2_img', baseUrl + res.data.data[0].img2.replace(/^\.\//, ''))
-							this.$set(this.formData, 'visual_exec3_img', baseUrl + res.data.data[0].img3.replace(/^\.\//, ''))
+
+							this.$set(this.formData, 'visual_exec1_img', baseUrl + res.data.data[0]
+								.img1
+								.replace(/^\.\//, ''))
+							this.$set(this.formData, 'visual_exec2_img', baseUrl + res.data.data[0]
+								.img2
+								.replace(/^\.\//, ''))
+							this.$set(this.formData, 'visual_exec3_img', baseUrl + res.data.data[0]
+								.img3
+								.replace(/^\.\//, ''))
+
+							this.score = res.data.data[0].score_sum
+							// this.$set(this.score, res.data.data[0].score_sum)
+
 
 						}
 						uni.hideLoading()
