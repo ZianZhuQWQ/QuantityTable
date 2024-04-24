@@ -97,11 +97,22 @@
 				console.log('第四个表单数据', JSON.stringify(store.state.mmseData))
 				console.log('第五个表单数据', JSON.stringify(store.state.mocaData))
 
+				uni.showModal({
+					title: '提示',
+					content: '请保证完成五个问卷后再提交，是否提交',
+					success: function(res) {
+						if (res.confirm) {
+							console.log('用户点击确定');
+							uni.switchTab({
+								url: '/pages/result/result'
+							})
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				});
 
 				
-				uni.switchTab({
-					url: '/pages/result/result'
-				})
 			},
 		}
 	};

@@ -219,8 +219,8 @@
 <style>
 	.page-wrap {
 		background-color: rgb(242, 242, 242);
-		height: 100%;
-		width: 100%;
+		width: 100vw;
+		height: 100vh;
 	}
 
 	image {
@@ -292,36 +292,6 @@
 		color: #ccc;
 	}
 
-	.login-help {
-		display: flex;
-		margin-left: 71%;
-		align-items: center;
-		justify-content: flex-end;
-		padding: 0 30rpx;
-		font-size: 10pt;
-		color: #bbb;
-	}
-
-	.login-help-img {
-		width: 11pt;
-		height: 11pt;
-		margin: 0 5rpx;
-	}
-
-	.confirm-btn {
-		font-size: 13pt;
-		line-height: 85rpx;
-		height: 85rpx;
-		background: #1296db;
-		color: #fff;
-		text-align: center;
-		border-radius: 5px;
-		margin: 50rpx 3%;
-	}
-
-	.confirm-btn:active {
-		opacity: .8;
-	}
 
 	.login {
 		background-color: #76EEC6;

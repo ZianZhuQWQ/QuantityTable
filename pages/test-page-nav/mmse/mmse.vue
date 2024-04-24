@@ -90,11 +90,11 @@
 
 
 
-				this.$set(this.otherData, 'age', '71')
-				this.$set(this.otherData, 'sex', '1')
-				this.$set(this.otherData, 'mobile', '12839483948')
-				this.$set(this.otherData, 'education', '本科')
-				this.$set(this.otherData, 'address', '广东东莞')
+				// this.$set(this.otherData, 'age', '71')
+				// this.$set(this.otherData, 'sex', '1')
+				// this.$set(this.otherData, 'mobile', '12839483948')
+				// this.$set(this.otherData, 'education', '本科')
+				// this.$set(this.otherData, 'address', '广东东莞')
 				// 	this.$set(this.otherData, 'created_at', '2024-04-10 18:09:11')
 			}
 		},
