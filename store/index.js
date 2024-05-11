@@ -681,6 +681,46 @@ const store = new Vuex.Store({
 			},
 		],
 		mmseItems: [{
+				key: 'age',
+				tips: '年龄',
+				result: {
+					label: '年龄',
+					type: 'input',
+				}
+			},
+			{
+				key: 'sex',
+				tips: '性别',
+				result: {
+					label: '性别',
+					type: 'input',
+				}
+			},
+			{
+				key: 'mobile',
+				tips: '手机号',
+				result: {
+					label: '手机号',
+					type: 'input',
+				}
+			},
+			{
+				key: 'education',
+				tips: '教育年限',
+				result: {
+					label: '教育年限',
+					type: 'input',
+				}
+			},
+			{
+				key: 'address',
+				tips: '地址',
+				result: {
+					label: '地址',
+					type: 'input',
+				}
+			},
+			{
 				key: 'initial_diagnosis',
 				tips: '初步诊断',
 				result: {
@@ -695,6 +735,9 @@ const store = new Vuex.Store({
 					label: '答对个数',
 					type: 'radio',
 					options: [{
+						label: '0',
+						value: 0,
+					}, {
 						label: '1',
 						value: 1,
 					}, {
@@ -719,6 +762,9 @@ const store = new Vuex.Store({
 					label: '答对个数',
 					type: 'radio',
 					options: [{
+						label: '0',
+						value: 0,
+					}, {
 						label: '1',
 						value: 1,
 					}, {
@@ -743,6 +789,9 @@ const store = new Vuex.Store({
 					label: '答对个数',
 					type: 'radio',
 					options: [{
+						label: '0',
+						value: 0,
+					}, {
 						label: '1',
 						value: 1,
 					}, {
@@ -761,6 +810,9 @@ const store = new Vuex.Store({
 					label: '答对个数',
 					type: 'radio',
 					options: [{
+						label: '0',
+						value: 0,
+					}, {
 						label: '1',
 						value: 1,
 					}, {
@@ -785,6 +837,9 @@ const store = new Vuex.Store({
 					label: '答对个数',
 					type: 'radio',
 					options: [{
+						label: '0',
+						value: 0,
+					}, {
 						label: '1',
 						value: 1,
 					}, {
@@ -799,7 +854,8 @@ const store = new Vuex.Store({
 			{
 				key: 'linguistic1',
 				tips: '这是什么东西？',
-				imgSrc: '../../../static/watches.png',
+				imgSrc: 'http://47.113.91.80:8002/upload/images/watches.png',
+
 				result: {
 					label: '是否答对',
 					type: 'radio',
@@ -815,7 +871,7 @@ const store = new Vuex.Store({
 			{
 				key: 'linguistic2',
 				tips: '这是什么东西？',
-				imgSrc: '../../../static/pen.png',
+				imgSrc: 'http://47.113.91.80:8002/upload/images/pen.png',
 				result: {
 					label: '是否答对',
 					type: 'radio',
@@ -850,6 +906,9 @@ const store = new Vuex.Store({
 					label: '答对个数',
 					type: 'radio',
 					options: [{
+						label: '0',
+						value: 0,
+					}, {
 						label: '1',
 						value: 1,
 					}, {
@@ -897,7 +956,6 @@ const store = new Vuex.Store({
 				tips: '这是一张图，请您在同一张纸上照样画出来',
 				imgSrc: '../../../static/linguistic4_4.png',
 				// 附件
-				// 附件
 				attachment: [{
 					key: 'linguistic4_4_img',
 					type: 'img',
@@ -935,7 +993,12 @@ const store = new Vuex.Store({
 		mocaItems: [{
 				key: 'visual_exec1',
 				tips: '我们有时会用‘123……’或者汉语的‘甲乙丙……’来表示顺序。\n请您按照从数字到汉字并逐渐升高的顺序画一条连线。]',
-				imgSrc: '../../../static/visual_exec1.png',
+				imgSrc: 'http://47.113.91.80:8002/upload/images/visual_exec1.png',
+				// 附件
+				attachment: [{
+					key: 'visual_exec1_img',
+					type: 'img',
+				}],
 				result: {
 					label: '评分',
 					type: 'radio',
@@ -951,7 +1014,12 @@ const store = new Vuex.Store({
 			{
 				key: 'visual_exec2',
 				tips: '请您照着这幅图在下面的空白处再画一遍，并尽可能精确',
-				imgSrc: '../../../static/visual_exec2.png',
+				imgSrc: 'http://47.113.91.80:8002/upload/images/visual_exec2.png',
+				// 附件
+				attachment: [{
+					key: 'visual_exec2_img',
+					type: 'img',
+				}],
 				result: {
 					label: '评分',
 					type: 'radio',
@@ -967,6 +1035,11 @@ const store = new Vuex.Store({
 			{
 				key: 'visual_exec3',
 				tips: '请您在此处画一个钟表，\n填上所有的数字并指示出11点10分',
+				// 附件
+				attachment: [{
+					key: 'visual_exec3_img',
+					type: 'img',
+				}],
 				imgSrc: '',
 				result: {
 					label: '答对个数',
@@ -1002,48 +1075,48 @@ const store = new Vuex.Store({
 			{
 				key: 'christen1',
 				tips: '请您告诉我这个动物的名字',
-				imgSrc: '../../../static/christen1.png',
+				imgSrc: 'http://47.113.91.80:8002/upload/images/christen1.png',
 				result: {
 					label: '是否答对',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
 			{
 				key: 'christen2',
 				tips: '请您告诉我这个动物的名字',
-				imgSrc: '../../../static/christen2.png',
+				imgSrc: 'http://47.113.91.80:8002/upload/images/christen2.png',
 				result: {
 					label: '是否答对',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
 			{
 				key: 'christen3',
 				tips: '请您告诉我这个动物的名字',
-				imgSrc: '../../../static/christen3.png',
+				imgSrc: 'http://47.113.91.80:8002/upload/images/christen3.png',
 				result: {
 					label: '是否答对',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
@@ -1054,11 +1127,11 @@ const store = new Vuex.Store({
 					label: '复述准确',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
@@ -1069,11 +1142,11 @@ const store = new Vuex.Store({
 					label: '复述准确',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
@@ -1084,11 +1157,11 @@ const store = new Vuex.Store({
 					label: '是否答对',
 					type: 'radio',
 					options: [{
-						label: '出现两次及两次以上错误',
-						value: 0,
-					}, {
 						label: '完全正确或出现一次错误',
 						value: 1,
+					}, {
+						label: '出现两次及两次以上错误',
+						value: 0,
 					}]
 				}
 			},
@@ -1126,11 +1199,11 @@ const store = new Vuex.Store({
 					label: '复述是否准确',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
@@ -1141,11 +1214,11 @@ const store = new Vuex.Store({
 					label: '复述是否准确',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
@@ -1157,11 +1230,11 @@ const store = new Vuex.Store({
 					label: '１分钟内说出的动物是否名称≥11个',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
@@ -1173,11 +1246,11 @@ const store = new Vuex.Store({
 					label: '回答是否正确',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
@@ -1188,11 +1261,11 @@ const store = new Vuex.Store({
 					label: '是否答对',
 					type: 'radio',
 					options: [{
-						label: '否',
-						value: 0,
-					}, {
 						label: '是',
 						value: 1,
+					}, {
+						label: '否',
+						value: 0,
 					}]
 				}
 			},
