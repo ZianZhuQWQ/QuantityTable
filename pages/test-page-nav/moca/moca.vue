@@ -480,7 +480,7 @@
 
 							this.score = res.data.data[0].score_sum
 							// this.$set(this.score, res.data.data[0].score_sum)
-
+							
 
 						}
 						uni.hideLoading()

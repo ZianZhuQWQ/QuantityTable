@@ -125,10 +125,10 @@
 					let that = this
 					let scoreSum = 0;
 					that.items.forEach(item => {
-						
+
 						scoreSum += Number(that.formData[item.key]) || 0;
-						console.log('this.formData[item.key]',this.formData[item.key])
-						console.log('scoreSum',scoreSum)
+						console.log('this.formData[item.key]', this.formData[item.key])
+						console.log('scoreSum', scoreSum)
 					})
 					that.score = scoreSum
 					console.log('ssssssssssssssssss', that.score)
@@ -299,7 +299,10 @@
 							this.$set(this.formData, 'linguistic4_4_img', baseUrl + res.data.data[0].img
 								.replace(/^\.\//, ''))
 
-
+							this.score = res.data.data[0].score_sum
+							if (res.data.data[0].education <= 15) {
+								this.score += 1; // 教育年限<= 12，总分加 1
+							}
 
 						}
 						uni.hideLoading()
