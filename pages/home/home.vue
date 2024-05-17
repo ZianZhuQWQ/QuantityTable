@@ -51,13 +51,13 @@
 				<view class="label">
 					姓名：
 				</view>
-				<input type="text" placeholder="请输入姓名" />
+				<input v-model="addUserInfo.userName" type="text" placeholder="请输入姓名" />
 			</view>
 			<view class="inputWrap">
 				<view class="label">
 					手机号：
 				</view>
-				<input type="number" placeholder="请输入手机号" />
+				<input v-model="addUserInfo.phoneNumber" type="number" placeholder="请输入手机号" />
 			</view>
 		</view>
 
@@ -84,18 +84,13 @@
 
 		data() {
 			return {
-
-
-
-
-
 				searchValue: '',
 
 
 				isAddUser: false,
 				addUserInfo: {
-					userName: 'ZZH',
-					phoneNumber: '19029384750'
+					userName: '',
+					phoneNumber: ''
 				},
 
 
