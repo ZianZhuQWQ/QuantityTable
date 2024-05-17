@@ -854,7 +854,7 @@ const store = new Vuex.Store({
 			{
 				key: 'linguistic1',
 				tips: '这是什么东西？',
-				imgSrc: 'http://47.113.91.80:8002/upload/images/watches.png',
+				imgSrc: 'https://alzheimerdisease.yueyutek.com:8002/upload/images/watches.png',
 
 				result: {
 					label: '是否答对',
@@ -871,7 +871,7 @@ const store = new Vuex.Store({
 			{
 				key: 'linguistic2',
 				tips: '这是什么东西？',
-				imgSrc: 'http://47.113.91.80:8002/upload/images/pen.png',
+				imgSrc: 'https://alzheimerdisease.yueyutek.com:8002/upload/images/pen.png',
 				result: {
 					label: '是否答对',
 					type: 'radio',
@@ -993,7 +993,7 @@ const store = new Vuex.Store({
 		mocaItems: [{
 				key: 'visual_exec1',
 				tips: '我们有时会用‘123……’或者汉语的‘甲乙丙……’来表示顺序。\n请您按照从数字到汉字并逐渐升高的顺序画一条连线。]',
-				imgSrc: 'http://47.113.91.80:8002/upload/images/visual_exec1.png',
+				imgSrc: 'https://alzheimerdisease.yueyutek.com:8002/upload/images/visual_exec1.png',
 				// 附件
 				attachment: [{
 					key: 'visual_exec1_img',
@@ -1014,7 +1014,7 @@ const store = new Vuex.Store({
 			{
 				key: 'visual_exec2',
 				tips: '请您照着这幅图在下面的空白处再画一遍，并尽可能精确',
-				imgSrc: 'http://47.113.91.80:8002/upload/images/visual_exec2.png',
+				imgSrc: 'https://alzheimerdisease.yueyutek.com:8002/upload/images/visual_exec2.png',
 				// 附件
 				attachment: [{
 					key: 'visual_exec2_img',
@@ -1075,7 +1075,7 @@ const store = new Vuex.Store({
 			{
 				key: 'christen1',
 				tips: '请您告诉我这个动物的名字',
-				imgSrc: 'http://47.113.91.80:8002/upload/images/christen1.png',
+				imgSrc: 'https://alzheimerdisease.yueyutek.com:8002/upload/images/christen1.png',
 				result: {
 					label: '是否答对',
 					type: 'radio',
@@ -1091,7 +1091,7 @@ const store = new Vuex.Store({
 			{
 				key: 'christen2',
 				tips: '请您告诉我这个动物的名字',
-				imgSrc: 'http://47.113.91.80:8002/upload/images/christen2.png',
+				imgSrc: 'https://alzheimerdisease.yueyutek.com:8002/upload/images/christen2.png',
 				result: {
 					label: '是否答对',
 					type: 'radio',
@@ -1107,7 +1107,7 @@ const store = new Vuex.Store({
 			{
 				key: 'christen3',
 				tips: '请您告诉我这个动物的名字',
-				imgSrc: 'http://47.113.91.80:8002/upload/images/christen3.png',
+				imgSrc: 'https://alzheimerdisease.yueyutek.com:8002/upload/images/christen3.png',
 				result: {
 					label: '是否答对',
 					type: 'radio',
