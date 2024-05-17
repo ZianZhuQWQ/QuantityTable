@@ -178,7 +178,7 @@
 
 					// 网络请求
 					uni.request({
-						url: 'http://47.113.91.80:8002/quest/uploadQuest5',
+						url: 'https://alzheimerdisease.yueyutek.com:8002/quest/uploadQuest5',
 						method: 'POST',
 						data: {
 							// patient_id: this.otherData.patient_id,
@@ -227,7 +227,7 @@
 					});
 
 					uni.request({
-						url: 'http://47.113.91.80:8002/quest/uploadQuestList',
+						url: 'https://alzheimerdisease.yueyutek.com:8002/quest/uploadQuestList',
 						method: 'POST',
 						timeout: 15000,
 						data: {
@@ -336,7 +336,7 @@
 				console.log('img1', img1)
 
 				uni.uploadFile({
-					url: 'http://47.113.91.80:8002/quest/uploadQuest5Img1',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/uploadQuest5Img1',
 					filePath: img1,
 					name: 'img',
 					method: 'POST',
@@ -369,7 +369,7 @@
 				console.log('img2', img2)
 
 				uni.uploadFile({
-					url: 'http://47.113.91.80:8002/quest/uploadQuest5Img2',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/uploadQuest5Img2',
 					filePath: img2,
 					name: 'img',
 					method: 'POST',
@@ -397,7 +397,7 @@
 				console.log('img3', img3)
 
 				uni.uploadFile({
-					url: 'http://47.113.91.80:8002/quest/uploadQuest5Img3',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/uploadQuest5Img3',
 					filePath: img3,
 					name: 'img',
 					method: 'POST',
@@ -439,7 +439,7 @@
 
 
 				uni.request({
-					url: 'http://47.113.91.80:8002/quest/getQuest5',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/getQuest5',
 					method: 'POST',
 					data: {
 
@@ -466,7 +466,7 @@
 							that.formData = JSON.parse(JSON.stringify(res.data.data[0]));
 							console.log('this.formData', that.formData)
 
-							const baseUrl = 'http://47.113.91.80:8002/';
+							const baseUrl = 'https://alzheimerdisease.yueyutek.com:8002/';
 
 							this.$set(this.formData, 'visual_exec1_img', baseUrl + res.data.data[0]
 								.img1

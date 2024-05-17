@@ -165,7 +165,7 @@
 
 					// 网络请求
 					uni.request({
-						url: 'http://47.113.91.80:8002/quest/uploadQuest3', //仅为示例，并非真实接口地址。
+						url: 'https://alzheimerdisease.yueyutek.com:8002/quest/uploadQuest3', //仅为示例，并非真实接口地址。
 						method: 'POST',
 						data: {
 
@@ -237,7 +237,7 @@
 
 
 				uni.request({
-					url: 'http://47.113.91.80:8002/quest/getQuest3',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/getQuest3',
 					method: 'POST',
 					data: {
 

@@ -95,7 +95,7 @@
 						// header: {
 						// 	"Content-Type": "application/x-www-form-urlencoded"
 						// },
-						url: 'http://47.113.91.80:8002/quest/login',
+						url: 'https://alzheimerdisease.yueyutek.com:8002/quest/login',
 						method: 'POST',
 						dataType: 'json',
 						data: {

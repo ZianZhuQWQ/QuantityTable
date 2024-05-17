@@ -196,7 +196,7 @@
 
 
 					uni.uploadFile({
-						url: 'http://47.113.91.80:8002/quest/uploadQuest4',
+						url: 'https://alzheimerdisease.yueyutek.com:8002/quest/uploadQuest4',
 						filePath: img,
 						name: 'img',
 						method: 'POST',
@@ -278,7 +278,7 @@
 
 
 				uni.request({
-					url: 'http://47.113.91.80:8002/quest/getQuest4',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/getQuest4',
 					method: 'POST',
 					data: {
 
@@ -295,7 +295,7 @@
 							this.formData = res.data.data[0]
 							console.log('this.formData', this.formData)
 
-							const baseUrl = 'http://47.113.91.80:8002/';
+							const baseUrl = 'https://alzheimerdisease.yueyutek.com:8002/';
 							this.$set(this.formData, 'linguistic4_4_img', baseUrl + res.data.data[0].img
 								.replace(/^\.\//, ''))
 

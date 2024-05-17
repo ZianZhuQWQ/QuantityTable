@@ -83,7 +83,7 @@
 				console.log('nurse_id:', this.nurse_id)
 
 				uni.request({
-					url: 'http://47.113.91.80:8002/quest/editUserPassWord',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/editUserPassWord',
 					method: 'POST',
 					dataType: 'json',
 					data: {

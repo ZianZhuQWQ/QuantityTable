@@ -154,7 +154,7 @@
 					title: '正在获取数据...'
 				})
 				uni.request({
-					url: 'http://47.113.91.80:8002/quest/getPatientInfo',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/getPatientInfo',
 					method: 'POST',
 					dataType: 'json',
 					data: {
@@ -213,7 +213,7 @@
 				// 发送请求到后端查询病人做过问卷的次数
 				// 使用uni.request或其他网络请求库发送异步请求
 				uni.request({
-					url: 'http://47.113.91.80:8002/quest/getPatient',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/getPatient',
 					method: 'POST',
 					data: requestData,
 					success: (res) => {
@@ -313,7 +313,7 @@
 						`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 						
 					uni.request({
-						url: 'http://47.113.91.80:8002/quest/patientRegister',
+						url: 'https://alzheimerdisease.yueyutek.com:8002/quest/patientRegister',
 						method: 'POST',
 						timeout: 15000,
 						data: {

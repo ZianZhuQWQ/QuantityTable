@@ -165,7 +165,7 @@
 						// 	`${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}-${String(date.getHours()).padStart(2, '0')}:${String(date.getMinutes()).padStart(2, '0')}:${String(date.getSeconds()).padStart(2, '0')}`;
 
 						uni.uploadFile({
-							url: 'http://47.113.91.80:8002/quest/uploadQuest2',
+							url: 'https://alzheimerdisease.yueyutek.com:8002/quest/uploadQuest2',
 							filePath: this.secondQuestion.videoPath,
 							name: 'img',
 							method: 'POST',
@@ -264,7 +264,7 @@
 
 				// 获取详情数据
 				uni.request({
-					url: 'http://47.113.91.80:8002/quest/getQuest2',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/getQuest2',
 					method: 'POST',
 					data: {
 
@@ -282,10 +282,7 @@
 							console.log('this.score_sum', this.score_sum)
 
 
-
-
-
-							const baseUrl = 'http://47.113.91.80:8002/';
+							const baseUrl = 'https://alzheimerdisease.yueyutek.com:8002/';
 
 							// // const filePath = res.data.data[0].img1
 							// // const fileUrl = baseUrl + filePath.replace(/^\.\//, '');

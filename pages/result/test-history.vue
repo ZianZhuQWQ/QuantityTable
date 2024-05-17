@@ -79,7 +79,7 @@
 		methods: {
 			fetchData() {
 				uni.request({
-					url: 'http://47.113.91.80:8002/quest/getPatientTime',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/getPatientTime',
 					method: 'POST',
 					dataType: 'json',
 					data: {

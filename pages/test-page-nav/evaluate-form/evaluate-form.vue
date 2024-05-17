@@ -194,7 +194,7 @@
 
 					// 网络请求
 					uni.request({
-						url: 'http://47.113.91.80:8002/quest/uploadQuest1',
+						url: 'https://alzheimerdisease.yueyutek.com:8002/quest/uploadQuest1',
 						method: 'POST',
 						timeout: 15000,
 						data: {
@@ -271,7 +271,7 @@
 
 
 				uni.request({
-					url: 'http://47.113.91.80:8002/quest/getQuest1',
+					url: 'https://alzheimerdisease.yueyutek.com:8002/quest/getQuest1',
 					method: 'POST',
 					data: {
 
