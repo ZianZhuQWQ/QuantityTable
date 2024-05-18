@@ -16,9 +16,6 @@
 			<text v-if="searchValue" class="close" @click="closeSearch">取消</text>
 		</view>
 
-
-
-
 		<!-- <view>
 			<uni-list v-for="patient in patients" :key="patient.patient_id">
 				patient_id:{{ patient.patient_id }},patient_name:{{ patient.patient_name }}, created_at:

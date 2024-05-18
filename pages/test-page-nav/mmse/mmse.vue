@@ -300,9 +300,7 @@
 								.replace(/^\.\//, ''))
 
 							this.score = res.data.data[0].score_sum
-							if (res.data.data[0].education <= 15) {
-								this.score += 1; // 教育年限<= 12，总分加 1
-							}
+							
 
 						}
 						uni.hideLoading()

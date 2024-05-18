@@ -51,7 +51,7 @@
 		data() {
 			return {
 				isDetail: false,
-				score_sum: 1,
+				score_sum: 0,
 
 
 				current: 1,
@@ -129,19 +129,20 @@
 						console.log('this.firstQuestion', this.firstQuestion)
 						console.log('this.secondQuestion', this.secondQuestion)
 						console.log('this.secondQuestion.result', this.secondQuestion.result[0])
-						console.log('uploadQuest2this.secondQuestion.videoPath', this.secondQuestion.videoPath)
+						console.log('this.secondQuestion.videoPath', this.secondQuestion.videoPath)
 						console.log('this.thirdQuestion', this.thirdQuestion)
 
 						console.log('this.otherData', this.otherData)
 
 
 						let scoreSum = 0;
-						this.items.forEach(item => {
+						// this.items.forEach(item => {
 							
-							scoreSum += Number(this.formData[item.key]) || 0;
-							console.log('this.formData[item.key]',this.formData[item.key])
-							console.log('scoreSum',scoreSum)
-						})
+						// 	scoreSum += Number(this.formData[item.key]) || 0;
+						// 	console.log('this.formData[item.key]',this.formData[item.key])
+						// 	console.log('scoreSum',scoreSum)
+						// })
+						this.scoreSum=this.secondQuestion.result[0]+this.thirdQuestion.result[0]
 						this.score = scoreSum
 						console.log('ssssssssssssssssss', this.score)
 						
@@ -195,7 +196,7 @@
 									icon: 'success'
 								})
 								uni.navigateTo({
-									url: `/pages/test-page-nav/test-page-nav?userName=${that.otherData?.patient_name}&userId=${that.otherData?.patient_id}`
+									url: `/pages/test-page-nav/test-page-nav?userName=${this.otherData?.patient_name}&userId=${this.otherData?.patient_id}`
 								});
 							},
 							fail(err) {

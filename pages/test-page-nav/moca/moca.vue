@@ -31,6 +31,9 @@
 			<view class="score" v-if="isDetail">
 				总得分：{{ score }}
 			</view>
+			<view class="score" v-if="isDetail">
+				测评结果：{{ result }}
+			</view>
 		</view>
 
 		<!-- 按钮区域 -->
@@ -70,7 +73,8 @@
 					patient_id: '',
 					patient_name: '',
 				},
-				items: store.state.mocaItems
+				items: store.state.mocaItems,
+				result:''
 			}
 		},
 		watch: {
@@ -480,7 +484,15 @@
 
 							this.score = res.data.data[0].score_sum
 							// this.$set(this.score, res.data.data[0].score_sum)
+							if (res.data.data[0].education <= 12) {
+								this.score += 1; // 教育年限<= 12，总分加 1
+							}
 							
+							if (this.score >= 26) {
+								this.result = '正常'; // 测评结果
+							} else {
+								this.result = '不正常';
+							}
 
 						}
 						uni.hideLoading()
