@@ -1329,7 +1329,7 @@ const store = new Vuex.Store({
 			},
 			{
 				key: 'education',
-				tips: '教育年限(填文盲、小学、中学、其它)',
+				tips: '教育年限(填年数)',
 				result: {
 					label: '教育年限',
 					type: 'input',
