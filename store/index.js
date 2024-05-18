@@ -65,7 +65,7 @@ const store = new Vuex.Store({
 			{
 				label: 'bmi[请输入身高体重，例如：1.6,45 ]',
 				key: 'bmi',
-				type: 'number'
+				type: 'input'
 			},
 			{
 				label: '出生地',
@@ -706,7 +706,7 @@ const store = new Vuex.Store({
 			},
 			{
 				key: 'education',
-				tips: '教育年限',
+				tips: '教育年限(填文盲、小学、中学、其它)',
 				result: {
 					label: '教育年限',
 					type: 'input',
@@ -990,7 +990,8 @@ const store = new Vuex.Store({
 			},
 
 		],
-		mocaItems: [{
+		mocaItems: [
+			{
 				key: 'visual_exec1',
 				tips: '我们有时会用‘123……’或者汉语的‘甲乙丙……’来表示顺序。\n请您按照从数字到汉字并逐渐升高的顺序画一条连线。]',
 				imgSrc: 'https://alzheimerdisease.yueyutek.com:8002/upload/images/visual_exec1.png',
@@ -1324,6 +1325,14 @@ const store = new Vuex.Store({
 						label: '6个',
 						value: 6,
 					}]
+				}
+			},
+			{
+				key: 'education',
+				tips: '教育年限(填文盲、小学、中学、其它)',
+				result: {
+					label: '教育年限',
+					type: 'input',
 				}
 			},
 		],
