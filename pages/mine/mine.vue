@@ -26,7 +26,7 @@
 		<view class="extra">
 			<uni-list>
 				<!-- <uni-list-item v-for="item in itemList" :key="item.title" :title="item.title" :note="item.note"  :thumb="item.thumb" :thumb-size="item.thumbSize" showArrow  :link="navigateTo" :to="item.to"/> -->
-				<uni-list-item title="修改资料" note="" thumb="/static/psw.png" thumbSize="lg" link="navigateTo"
+				<uni-list-item title="修改资料" note=" " thumb="/static/psw.png" thumbSize="lg" link="navigateTo"
 					to="/pages/mine/psw" showArrow />
 
 				<uni-list-item>
@@ -54,7 +54,7 @@
 						</template> -->
 				</uni-list-item>
 
-				<uni-list-item title="退出登录" note="" thumb="/static/logout.png" thumbSize="lg" link="navigateTo"
+				<uni-list-item title="退出登录" note=" " thumb="/static/logout.png" thumbSize="lg" link="navigateTo"
 					to="/pages/login/login" showArrow />
 
 			</uni-list>
