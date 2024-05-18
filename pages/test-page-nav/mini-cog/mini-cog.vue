@@ -128,9 +128,9 @@
 
 						console.log('this.firstQuestion', this.firstQuestion)
 						console.log('this.secondQuestion', this.secondQuestion)
-						console.log('this.secondQuestion.result', this.secondQuestion.result[0])
+						console.log('this.secondQuestion.result[0]', this.secondQuestion.result[0])
 						console.log('this.secondQuestion.videoPath', this.secondQuestion.videoPath)
-						console.log('this.thirdQuestion', this.thirdQuestion)
+						console.log('this.thirdQuestionresult[0]', this.thirdQuestion.result[0])
 
 						console.log('this.otherData', this.otherData)
 
@@ -142,7 +142,7 @@
 						// 	console.log('this.formData[item.key]',this.formData[item.key])
 						// 	console.log('scoreSum',scoreSum)
 						// })
-						this.scoreSum=this.secondQuestion.result[0]+this.thirdQuestion.result[0]
+						scoreSum=Number(this.secondQuestion.result[0])+Number(this.thirdQuestion.result[0])
 						this.score = scoreSum
 						console.log('ssssssssssssssssss', this.score)
 						
